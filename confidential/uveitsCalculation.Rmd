@@ -1,0 +1,955 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+---
+title: "R Notebook"
+output: html_notebook
+---
+# Uveitis Data Analysis
+```{r}
+#setwd(file.path("C:", "Users", "jalsc", "PycharmProjects", "medicalchallenge"))
+#getwd()
+```
+
+## 0.0 import all libraries
+```{r}
+my_packages <- c("tidyverse", "caret", "rpart", "tree","Metrics", "randomForest","ggplot2","repr","dplyr")
+not_installed <- my_packages[!(my_packages %in% installed.packages()[ , "Package"])]
+if(length(not_installed)) install.packages(not_installed)
+```
+
+## 1.0 Read the data
+For the model I will create the following varables for the different tables:
+- uveitisdataraw ==> complete table as factor
+- uveitisdata ==> table -diagnosis column
+- uveitisdata2 ==> table -location column
+- uveitis-data ==> table -categorical column
+- posterior ==> table - location with posterior True/False column
+```{r}
+library(dplyr)
+#raw
+uveitisdataraw <- read.csv(file = 'data/uveitis_data.csv')
+uveitisdataraw <- mutate_if(uveitisdataraw, is.character, as.factor)
+#uveitisdata = raw - diagnosis
+uveitisdata<- select(uveitisdataraw, -diagnosis)
+#uveitisdata2 = uveitisdata -location
+uveitisdata2 <- select(uveitisdata, -location)
+# uveitisdatafull = raw - diagnosis - categorical
+uveitisdatafull<- select(uveitisdata, -categorical)
+#specialgroupe posterior
+posterior <- uveitisdataraw %>% filter(location == "posterior") %>%
+  select(-location)
+```
+
+## 1.1 Testing Data
+The ytest and xtest tables are splitted tables with a ratio of 1:4.
+For a better distribution the splitting was executed with a stratified sampling.
+```{r}
+y_test <- read.csv(file = 'data/uveitis_data_ytest.csv')
+y_test <- mutate_if(y_test, is.character, as.factor)
+X_test <- read.csv(file = 'data/uveitis_data_xtest.csv')
+X_test <- mutate_if(X_test, is.character, as.factor)
+testData <- cbind(X_test, factor(y_test$X0))
+names(testData)[names(testData)=="factor(y_test$X0)"] <- "Y"
+testData$X0 <- factor(testData$X0)
+levels(testData$X0)
+```
+# 1.2 Overfritted Data
+The distribution of the ouput variable categorical is very uneven so a overfitted table with synthetic data was created with a total of 2544 rows. 
+The systetic Data was created with a knearest neighbor algorithm. To be able to do the overfitting on the dataset hat the "Non-existing" values had to be 
+replaced with the mean of the particular column, also the categorical values had to be converted into numbers. 
+```{r}
+#oversampled data
+yOverfit_train <- read.csv(file = 'data/uveitis_data_yOverfit_train.csv')
+yOverfit_train <- mutate_if(yOverfit_train, is.character, as.factor)
+XOverfit_train <- read.csv(file = 'data/uveitis_data_XOverfit_train.csv')
+XOverfit_train <- mutate_if(XOverfit_train, is.character, as.factor)
+Overfit_train <- cbind(XOverfit_train, factor(yOverfit_train$X0))
+names(Overfit_train)[names(Overfit_train)=="factor(yOverfit_train$X0)"] <- "Y"
+Overfit_train$X0 <- factor(Overfit_train$X0)
+levels(Overfit_train$X0) <- c('scleritis', 'intermediate', 'posterior', 'anterior', 'pan', 'unknown')
+levels(Overfit_train$X0)
+```
+# 1.1 Crossfitted Data
+The crossfitted Dataset is a table who was created almost the same as the Overfitted Dataset.Just with the difference that in these Dataset the algorithm 
+is not making a total of 2544 row instead it is making a mix of overfitting and underfitting with a total of 1933 rows.
+```{r}
+#crossampling
+XCrossfit_train <- read.csv(file = 'data/uveitis_data_XCrossfit_train.csv')
+XCrossfit_train <- mutate_if(XCrossfit_train, is.character, as.factor)
+yCrossfit_train <- read.csv(file = 'data/uveitis_data_yCrossfit_train.csv')
+yCrossfit_train <- mutate_if(yCrossfit_train, is.character, as.factor)
+Crossfit_train <- cbind(XCrossfit_train, factor(yCrossfit_train$X0))
+names(Crossfit_train)[names(Crossfit_train)=="factor(yCrossfit_train$X0)"] <- "Y"
+Crossfit_train$X0 <- round(Crossfit_train$X0,0)
+Crossfit_train$X0 <- factor(Crossfit_train$X0)
+levels(Crossfit_train$X0) <- c('scleritis', 'intermediate', 'posterior', 'anterior', 'pan', 'unknown')
+levels(Crossfit_train$X0)
+```
+
+## 2.0 k-fold cross validation
+To see if the dataset is "good" enough for a prediction model. The dataset was investigated with a k-fold crossvalidation with 10 folders.
+Result:
+- the investigation shows that the data samples are not very different
+- this is good sign, a model can predict something 
+```{r}
+library(rpart)
+n <- nrow(uveitisdata)
+K <- 10
+taille <- n%/%K
+set.seed(5)
+alea <- runif(n)
+rang <- rank(alea)
+bloc <- (rang-1)%/%taille +1
+bloc<- as.factor(bloc)
+
+all.err <- numeric(0)
+for (k in 1:K){
+  arbre<- rpart(categorical~., data = uveitisdata[bloc!=k,], method = 'class')
+  pred <- predict(arbre,newdata = uveitisdata[bloc==k,],type = "class")
+  mc <- table(uveitisdata$categorical[bloc==k],pred)
+  err <- 1.0 -(mc[1,1]+mc[2,2])/sum(mc)
+  all.err <- rbind(all.err,err)
+  
+}
+cat("the standard deviation is: ",sd(all.err),"\n")
+cat("the mean of error rate is : ",  mean(all.err), "with a max of: ", max(all.err)," and a min of :", min((all.err)))
+```
+### 2.1 Oversampled Data
+```{r}
+n <- nrow(Overfit_train)
+K <- 10
+taille <- n%/%K
+set.seed(5)
+alea <- runif(n)
+rang <- rank(alea)
+bloc <- (rang-1)%/%taille +1
+bloc<- as.factor(bloc)
+
+all.err <- numeric(0)
+for (k in 1:K){
+  arbre<-rpart(Y~., data = Overfit_train[bloc!=k,], method = 'class')
+  pred <- predict(arbre,newdata = Overfit_train[bloc==k,],type = "class")
+  mc <- table(Overfit_train$Y[bloc==k],pred)
+  err <- 1.0 -(mc[1,1]+mc[2,2])/sum(mc)
+  all.err <- rbind(all.err,err)
+  
+}
+
+cat("the standard deviation is: ",sd(all.err),"\n")
+cat("the mean of error rate is : ",  mean(all.err), "with a max of: ", max(all.err)," and a min of :", min((all.err)))
+```
+### 2.2 Crosssampled Data
+```{r}
+n <- nrow(Crossfit_train)
+K <- 10
+taille <- n%/%K
+set.seed(5)
+alea <- runif(n)
+rang <- rank(alea)
+bloc <- (rang-1)%/%taille +1
+bloc<- as.factor(bloc)
+
+all.err <- numeric(0)
+for (k in 1:K){
+  arbre<- rpart(Y~., data = Overfit_train[bloc!=k,], method = 'class')
+  pred <- predict(arbre,newdata = Overfit_train[bloc==k,],type = "class")
+  mc <- table(Overfit_train$Y[bloc==k],pred)
+  err <- 1.0 -(mc[1,1]+mc[2,2])/sum(mc)
+  all.err <- rbind(all.err,err)
+  
+}
+cat("the standard deviation is: ",sd(all.err),"\n")
+cat("the mean of error rate is : ",  mean(all.err), "with a max of: ", max(all.err)," and a min of :", min((all.err)))
+```
+### 2.3 Conclusion 
+#### normal Data
+- error rate mean : 0.556
+- error rate min : 0.59
+- error rate max: 0.51
+- error rate std: 0.026
+#### overfitted Data
+- error rate mean : 0.666
+- error rate min : 0.63
+- error rate max: 0.7
+- error rate std: 0.022
+#### crossfitted Data
+- error rate mean : 0.667
+- error rate min : 0.70
+- error rate max: 0.63
+- error rate std: 0.22
+
+In the k-fold crossvalidation test the overfitted data was worse than the normal data.
+The oversampled and the crosssampled data was almost the same result.
+
+## 3.0 Imbalanced Data sampling
+- the distibution of the target value is very unequal
+- the unequality has to be considered
+
+```{r}
+library(ggplot2)
+dta <- as.character(uveitisdata$categorical)
+dta[is.na(dta)] <- 'NA'
+dta <- as.factor(dta)
+
+p<- ggplot(uveitisdata, aes(x=categorical)) + geom_histogram(binwidth=1, stat="count") 
+p
+```
+### 3.1 normal sampling
+- the distribution is not the same, similar but not equal.
+```{r}
+trainNorm <-sample_n(uveitisdata,900,replace = TRUE)
+as.data.frame(trainNorm)
+trainNorm
+p1<- ggplot(trainNorm, aes(x=categorical)) + geom_histogram(binwidth=1, stat="count") 
+plot( p1) 
+```
+
+# 3.2 sampling with CreateDataPartition()
+- this function is most likely used for some sort of stratified sampling
+- the distribution is equal to the sample
+```{r}
+library(caret)
+training.samples <- uveitisdata$categorical %>%
+  createDataPartition(p = 0.2, list = FALSE)
+test.data <- uveitisdata[-training.samples, ]
+p2<- ggplot(test.data, aes(x=categorical)) + geom_histogram(binwidth=1, stat="count") 
+plot( p2, col=rgb(0,0,1,1/4), xlim=c(0,10)) 
+
+```
+
+### 3.3 strarified sampling
+Manually methode for stratified sampling
+```{r}
+set.seed(1)
+train <- uveitisdata %>%
+  group_by(categorical) %>%
+  mutate(n=n()) %>%
+  sample_frac(0.2,weight=n, replace=TRUE)
+p3<- ggplot(train, aes(x=categorical)) + geom_histogram(binwidth=1, stat="count") 
+plot( p3, col=rgb(0,0,1,1/4), xlim=c(0,10))  
+```
+### 3.4 conclusion 
+- for stratified sampling the easiest way is the : createDataPartition()funtion. 
+- without stratified sampling the distribution is similar but not equal. Especially the rare classes are not predic
+
+
+## 4.0 fist try with tree
+- the big Problem is the visualisation, who is very ugly and not readable
+- I decided to use an other package: r part
+- the missclasification error rate is at 0.4
+- it shows that the location is the most important feature
+
+```{r}
+library(tree)
+# Split the data into training and test set
+set.seed(101)
+training.samples <- uveitisdata$categorical %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- uveitisdata[training.samples, ]
+test.data <- uveitisdata[-training.samples, ]
+
+# Build the model
+model1 <- tree(categorical~., data=uveitisdata, subset=training.samples)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model1 %>% predict(test.data)
+plot(model1); text(model1, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model1))
+str(uveitisdata)
+```
+
+```{r}
+tree.pred <- predict(model1,test.data, type="class")
+with(test.data, table(tree.pred, categorical))
+cv.uveitisdata <- cv.tree(model1, FUN = prune.misclass)
+cv.uveitisdata
+plot(cv.uveitisdata)
+prune.uveitisdata <- prune.misclass(model1, best = 12)
+plot(prune.uveitisdata)
+text(prune.uveitisdata, all=TRUE, cex=0.5)
+```
+
+```{r}
+tree.pred = predict(prune.uveitisdata, test.data, type="class")
+with(test.data, table(tree.pred, categorical))
+```
+
+## 4.0.1 Conclusion
+- the model is good in predicting idiopathic
+- the model is good in predicting wds
+- the model falsly predict systemic as idiopathic and wds
+- the model is very bad in predicting rare categories
+- the model falsly predict noneoplastic masquerade as wds
+
+### 4.1.1 Overfitted Data
+legend :
+1. scleritis
+2. intermediate
+3. posterior
+4. anterior
+5. wds
+
+```{r}
+# Build the model
+model2 = tree(Y~., data=Overfit_train)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model2 %>% predict(testData)
+plot(model2); text(model2, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model2))
+```
+
+```{r}
+tree.pred = predict(model2, testData, type="class")
+with(testData, table(tree.pred, Y))
+cv.uveitisdata = cv.tree(model2, FUN = prune.misclass)
+cv.uveitisdata
+plot(cv.uveitisdata)
+prune.uveitisdata = prune.misclass(model2, best = 12)
+plot(prune.uveitisdata)
+text(prune.uveitisdata, all=TRUE, cex=0.5)
+```
+
+```{r}
+tree.pred = predict(prune.uveitisdata, testData, type="class")
+with(testData, table(tree.pred, Y))
+```
+### 4.1.1.1 Conclusion
+
+### 4.1.2 Crossfitted Data 
+```{r}
+# Build the model
+model3 = tree(Y~., data=Crossfit_train)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model3 %>% predict(testData)
+plot(model3); text(model3, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model3))
+```
+
+```{r}
+tree.pred = predict(model3, testData, type="class")
+with(testData, table(tree.pred, Y))
+cv.uveitisdata = cv.tree(model3, FUN = prune.misclass)
+cv.uveitisdata
+plot(cv.uveitisdata)
+prune.uveitisdata = prune.misclass(model3, best = 12)
+plot(prune.uveitisdata)
+text(prune.uveitisdata, all=TRUE, cex=0.5)
+```
+### 4.2 Predictin Diagnosis
+```{r}
+library(tree)
+# Split the data into training and test set
+set.seed(101)
+
+uveitisdataraw1 <- select(uveitisdataraw, -categorical)
+training.samples <- uveitisdataraw1$diagnosis %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- uveitisdataraw1[training.samples, ]
+test.data <- uveitisdataraw1[-training.samples, ]
+
+# Build the model
+model11 <- tree(diagnosis~., data=uveitisdataraw1, subset=training.samples)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model11 %>% predict(test.data)
+plot(model11); text(model11, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model11))
+```
+
+```{r}
+tree.pred <- predict(model11, test.data, type="class")
+with(test.data, table(tree.pred, diagnosis))
+cv.uveitisdataraw1 <- cv.tree(model11, FUN = prune.misclass)
+cv.uveitisdataraw1
+plot(cv.uveitisdataraw1)
+prune.uveitisdataraw1 = prune.misclass(model11, best = 12)
+plot(prune.uveitisdataraw1)
+text(prune.uveitisdataraw1, all=TRUE, cex=0.5)
+```
+
+```{r}
+tree.pred = predict(prune.uveitisdataraw1, test.data, type="class")
+with(test.data, table(tree.pred, diagnosis))
+```
+
+### 4.2.1 Conclusion
+The model has a error rate of 21 % witch is very good. It shows that the model can predict alot of the diagnosis right. But there are a lot of very rare
+diagnosis witch the model can not handle. The predictable diagnosis are:
+- idiopathic_anterior
+- idiopathic_panuveitis
+- idiopathic_posterior
+- idiopathic_scleritis
+- hla_b27(4/4)
+- wds(18/18)
+- vka(8/9)
+- toxoplasmosis(5/6)
+- nonneoplastic_masquerade(21/23)
+- pars_planitis(29/29)
+- neoplastic_masquerade(4/4)
+
+### 4.3 package rpart without subset
+- the visualisation is better but the error rate is at 0.54, wich is a lot higher than with the tree package
+```{r}
+library(rpart.plot)
+#make the model
+tree<- rpart(categorical~., data = uveitisdata, method = 'class')
+print(tree)
+#predict categorical
+pred <- predict(tree, newdata = uveitisdata, type = "class")
+mc <- table(uveitisdata$categorical,pred)
+as.data.frame.matrix(mc) 
+print(mc)
+err.resub <- (1.0 -(mc[1,1]+mc[2,2])/sum(mc))
+print(err.resub)
+rpart.plot(tree, fallen.leaves=FALSE,tweak = .8, under = TRUE,type = 3)
+
+```
+
+### 4.4 lets try it with subset
+- the error rate is a 0.52 
+```{r}
+train=sample(1:nrow(uveitisdata), 900)
+#stratified sampling
+tree<- rpart(categorical~., data = uveitisdata,subset=train, method = 'class' )
+rpart.plot(tree, type = 3, clip.right.labs = FALSE)
+rpart.rules(tree)
+test <- uveitisdata[-train,]
+tree.pred = predict(tree, uveitisdata[-train,], type="class")
+test['prediction']<-tree.pred
+mCtable <- table(test$categorical,test$prediction)
+accuracy <- mean(test$categorical == test$prediction)
+as.data.frame.matrix(mCtable) 
+print(accuracy)
+error <- mean(test$categorical != test$prediction)
+print(error)
+```
+
+### 4.5 Overfitted Data
+- the error rate is 0.78
+```{r}
+#make the model
+tree<- rpart(Y~., data = Overfit_train, method = 'class')
+print(tree)
+#predict categorical
+pred <- predict(tree, newdata = testData, type = "class")
+mc <- table(testData$Y,pred)
+as.data.frame.matrix(mc) 
+print(mc)
+err.resub <- (1.0 -(mc[1,1]+mc[2,2])/sum(mc))
+print(err.resub)
+rpart.plot(tree, fallen.leaves=FALSE,tweak = .8, under = TRUE,type = 3)
+summary(tree)
+```
+
+### 4.6 Crossfitted Data
+- this combination has a remakable bad error rate of 0.99
+```{r}
+library(rpart)
+#make the model
+tree2<- rpart(Y~., data = Crossfit_train, method = 'class')
+print(tree)
+#predict categorical
+pred2 <- predict(tree2, newdata = testData, type = "class")
+mc2 <- table(testData$Y,pred2)
+as.data.frame.matrix(mc2) 
+print(mc2)
+err.resub <- (1.0 -(mc2[1,1]+mc2[2,2])/sum(mc2))
+print(err.resub)
+rpart.plot(tree2, fallen.leaves=FALSE,tweak = .8, under = TRUE,type = 3)
+```
+
+### 4.7 Conclusion 
+The package rpart has a better visualisation but the error rate is worse than the tree package.
+
+
+## 5.0 investigate the prediction of diagnosis !!!!!!
+There is 27 classes witch is too mutch.
+The model predicts:
+- hla_b27 4 of 12
+- idiopathics most likely right
+- nonneoplastic_masquerade 18 of 19
+- pars planitis 24 of 24
+- wds 13 of 19 (false are all bcr)
+- vkh 6 of 10 
+- toxoplasmoisis 4 of 11 ;toxocariasis(2), tuberculoisis(2) and viral(2)
+
+There is a big diference in the prediction of the classification values. 
+The error rate is is realy good with 20% but it is only because the good prediction of the idiopathics.
+A lot of the diagnosis was not predicted ones. Others were confound with certain diagnosis.
+```{r}
+library(rpart)
+library(rpart.plot)
+train=sample(1:nrow(uveitisdataraw), 900)
+#stratified sampling
+tree<- rpart(diagnosis~., data = uveitisdataraw,subset=train, method = 'class' )
+rpart.plot(tree, type = 3, clip.right.labs = FALSE)
+rpart.rules(tree)
+test <- uveitisdataraw[-train,]
+tree.pred = predict(tree, uveitisdataraw[-train,], type="class")
+test['prediction']<-tree.pred
+mCtable <- table(test$diagnosis,test$prediction)
+accuracy <- mean(test$diagnosis == test$prediction)
+as.data.frame.matrix(mCtable) 
+print(accuracy)
+error <- mean(test$diagnosis != test$prediction)
+print(error)
+summary(tree)
+print(accuracy)
+print(error)
+mCtable
+```
+
+## 6.0 feature importance
+- because the results of the trees are very different I try the model: randomForest
+### 6.1 Random Forest with package randomforest(cannot handle nan values), nan values replace trough mean
+```{r}
+print(sum(is.na(uveitisdata)))
+
+for(i in 1:ncol(uveitisdata)){
+  uveitisdata[is.na(uveitisdata[,i]), i] <- mean(uveitisdata[,i], na.rm = TRUE)
+}
+print(sum(is.na(uveitisdata)))
+
+for(i in 1:ncol(uveitisdataraw)){
+  uveitisdataraw[is.na(uveitisdataraw[,i]), i] <- mean(uveitisdataraw[,i], na.rm = TRUE)
+}
+
+```
+
+### 6.2 The Random Forest
+```{r}
+library(randomForest)
+library(caret)
+# Create features and target
+X <- select(uveitisdata, -categorical)
+y <- uveitisdata$categorical
+# Split data into training and test sets
+index <- createDataPartition(y, p=0.75, list=FALSE)
+#index=sample(1:nrow(uveitisdata), 800)
+X_train <- X[ index, ]
+X_test <- X[-index, ]
+y_train <- y[index]
+y_test<-y[-index]
+# Train the model 
+regr <- randomForest(x = X_train, y = y_train , maxnodes = 2, ntree = 3, importance=TRUE)
+# Make prediction
+predictions <- predict(regr, X_test)
+
+result <- X_test
+result['categorical'] <- y_test
+result['prediction'] <- predictions
+
+head(result)
+
+summary(regr)
+imp <- importance(regr)
+as.data.frame(imp) %>%
+  arrange(desc(MeanDecreaseGini))
+result
+varImpPlot(regr)
+importance(regr)
+```
+
+### 6.2.1 true accuracy
+- the true value of thee error rate is 0.4981132, who is very bad.
+- in the confusion matrix we see that the forest only can predict ideopathic
+```{r}
+mC <- table(result$categorical,result$prediction)
+accuracy <- mean(result$categorical == result$prediction)
+
+print(accuracy)
+error <- mean(result$categorical != result$prediction)
+print(error)
+print(mC)
+```
+
+
+### 6.2 The Random Forest with oversampled data
+- error rate of 0.88
+```{r}
+# Create features and target
+X <- select(Overfit_train, -Y)
+y <- Overfit_train$Y
+regr <- randomForest(x = X, y = y , maxnodes = 2, ntree = 30, importance=TRUE)
+# Make prediction
+predictions <- predict(regr, testData)
+with(testData, table(predictions, Y))
+
+head(result)
+
+summary(regr)
+imp <- importance(regr)
+as.data.frame(imp) %>%
+  arrange(desc(MeanDecreaseGini))
+result
+varImpPlot(regr)
+importance(regr)
+```
+
+### 6.2.2 evaluation of random forest; categorical
+- the most important features are :
+- location
+- ac_abn_od_cells
+- ac_abn_os_cells
+
+
+### 6.2.3 it also shows that we can predict certain categories with certain values:
+- neoplastic masquerade --> no test makes a difference
+- not_uveitis --> no test makes a difference
+- scleritis --> no test makes a difference
+- unknown--> only the location indicates something
+- other --> only a few tests are important(v4,v7)
+- nonneoplastic masquerade --> only a few tests are important(location, v1,v2,v3,v8,v9,v11,v14)
+- wds --> the important features are(location,ac_abn_os_cells, abn_od_cells, v1-v14)
+- systemic ->the feature who are NOT important are(sex, abn_od_haze, abn_os_haze,v8,v9,v16,v21,v34,v35,v36,v38,v39, o_2,o_3,o_4,o_5)
+- ideopathic --> the feature who are NOT important are(sex, o_2,o_3,o_5,v37,v38,v27,v34, v21, v23)
+- infectious --> the important features are(ac_abn_od_cells, ac_abn_os_cells, abn_od_cells(!!!! only on 1 side ???), abn_od_haze, abn_os_haze, v4- v9, 
+v11-v15, v18, v36-v38, o_6)
+
+### 6.2.4 unused features
+The not important features are :
+- sex,o_2, o_3, o_5
+
+### 6.3 Random Forest for Diagnosis
+For this calculation the categorical has to be dropped.
+```{r}
+library(randomForest)
+library(caret)
+# Create features and target
+X <- select(uveitisdataraw, -diagnosis, -categorical)
+y <- uveitisdataraw$diagnosis
+# Split data into training and test sets
+index <- createDataPartition(y, p=0.8, list=FALSE)
+#index=sample(1:nrow(uveitisdata), 800)
+X_train <- X[ index, ]
+X_test <- X[-index, ]
+y_train <- y[index]
+y_test<-y[-index]
+# Train the model 
+regr <- randomForest(x = X_train, y = y_train , maxnodes = 2, ntree = 5, importance=TRUE)
+# Make prediction
+predictions <- predict(regr, X_test)
+
+result <- X_test
+result['diagnosis'] <- y_test
+result['prediction'] <- predictions
+
+head(result)
+
+summary(regr)
+imp <- importance(regr)
+as.data.frame(imp) %>%
+  arrange(desc(MeanDecreaseGini))
+result
+varImpPlot(regr)
+importance(regr)
+```
+
+### 6.3.1 true accuracy
+```{r}
+mC <- table(result$diagnosis,result$prediction)
+accuracy <- mean(result$diagnosis == result$prediction)
+
+print(accuracy)
+error <- mean(result$diagnosis != result$prediction)
+print(error)
+print(mC)
+```
+
+### 6.3.2 Conclusion
+The error value is only at 79% witch is remarkable bad. The convusion matrix shows that the model only predicts idiopathic_anterior.
+The result is unchanged with adding or dropping location.
+It seams that the amount of tree used has this effect, that only the most common will be predicted. With only 3 Trees the model was able to predicts leastwise
+pars planitis.
+
+### 6.4 Conclusion:
+- not used features are getting deleted(sex,o_2, o_3, o_5)
+- the right prediction of (neoplastic masquerade , not_uveitis, scleritis, unknown and other) is unrealistic, so they will also be deleted
+- random forest model is less effective in prediction and predicts almost all as idiopathic
+which location indicated unknown?
+- it is posterior(6) or unknown(8)
+```{r}
+uveitisdataClean1 <- uveitisdata %>%
+  select(-sex, -o_2,-o_3,-o_5) %>%
+  filter(categorical != "unknown")%>%
+  filter(categorical != "other")%>%
+  filter(categorical != "neoplastic masquerade")%>%
+  filter(categorical != "scleritis")%>%
+  filter(categorical != "not_uveitis")
+```
+
+
+## 7.0 Analysing not_uveitis
+- it is only a single woman who has : not_uveitis
+- the location isunknown
+- all values are in range, only v21 slightly out of range
+```{r}
+notuveitis <- uveitisdata %>%
+  filter(categorical == "not_uveitis")
+summary(notuveitis)
+```
+
+## 8.0 the location test
+- lets try to predict the location without the categorical and see what happens
+```{r}
+# Create features and target
+xx <- select(uveitisdataClean1, -categorical)
+X <- select(xx, -location)
+y <- uveitisdataClean1$location
+# Split data into training and test sets
+index <- createDataPartition(y, p=0.75, list=FALSE)
+index=sample(1:nrow(uveitisdataClean1), 800)
+
+X_train <- X[ index, ]
+X_test <- X[-index, ]
+y_train <- y[index]
+y_test<-y[-index]
+
+# Train the model 
+regrtest1 <- randomForest(x = X_train, y = y_train , maxnodes = 10, ntree = 30, importance=TRUE)
+# Make prediction
+predictions <- predict(regrtest1, X_test)
+
+result <- X_test
+result['location'] <- y_test
+result['prediction'] <- predictions
+
+summary(regrtest1)
+varImpPlot(regrtest1)
+importance(regrtest1)
+```
+
+```{r}
+mC <- table(result$location,result$prediction)
+accuracy <- mean(result$location == result$prediction)
+
+cat("accuray is: ",accuracy,"\n")
+error <- mean(result$location != result$prediction)
+cat("error   is: ",error,"\n")
+print(mC)
+```
+
+### 8.1 the result of the test
+- the error rate is higher than with the category, so it is easier to predict the result of the categroy than the location itself
+- the visualisation of the meandecreasegini and accuracy shows that the importance of the columns is better distributed as the normal prediction
+- the location unknown is absolutly unnecesary
+
+### 9.0 the location scleritis
+Scleritis is highly attempted to be idiopathic, and its a "rare" location. The importance shows also that there are just a few columns who are invoved in the sclerits diagnosis. This are: V0, V1, v10, v13, v26. Because of that the location scleritis will also be dropped. 
+```{r}
+scleritisLoc <- uveitisdataClean1 %>%
+  filter(location == "scleritis")
+uveitisdataClean1$categorical <- factor(uveitisdataClean1$categorical)
+summary(scleritisLoc)
+```
+
+### 9.1 deleating the unnesssary features and locations
+- columns: v36,v38,v39, v15, v23, v3
+- location unknown and scleritis
+```{r}
+importance(regrtest1)
+```
+
+```{r}
+uveitisdataClean2 <- uveitisdataClean1 %>%
+  select(-v36,-v38,-v39, -v15,-v23,-v3) %>%
+  filter(location != "scleritis")%>%
+  filter(location != "unknown")
+```
+
+# 9.2 decision tree with cleandata1
+- error rate of 40 %
+```{r}
+# Split the data into training and test set
+set.seed(106)
+training.samples <- uveitisdataClean1$categorical %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- uveitisdataClean1[training.samples, ]
+test.data <- uveitisdataClean1[-training.samples, ]
+# Build the model
+model2 = tree(categorical~., data=uveitisdataClean1)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model2 %>% predict(test.data)
+plot(model2); text(model2, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model2))
+```
+
+### 9.3 decision tree with cleandata2
+- error rate of 41 %
+```{r}
+# Split the data into training and test set
+set.seed(106)
+training.samples <- uveitisdataClean2$categorical %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- uveitisdataClean2[training.samples, ]
+test.data <- uveitisdataClean2[-training.samples, ]
+# Build the model
+model3 = tree(categorical~., data=uveitisdataClean2)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model3 %>% predict(test.data)
+plot(model3); text(model3, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model3))
+```
+
+### 9.4 a model without ideopathic
+- error rate 28 %
+```{r}
+uveitisdataClean2$categorical <- factor(uveitisdataClean2$categorical)
+levels(uveitisdataClean2$categorical)
+```
+
+```{r}
+notideo <- uveitisdataClean2 %>%
+  filter(categorical!="idiopathic")
+notideo$categorical <- factor(notideo$categorical)
+```
+
+```{r}
+set.seed(108)
+training.samples <- notideo$categorical %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- notideo[training.samples, ]
+test.data <- notideo[-training.samples, ]
+# Build the model
+model4 = tree(categorical~., data=notideo, subset=training.samples)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model4 %>% predict(test.data)
+plot(model4); text(model4, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model4))
+```
+### 9.4.1 a model just with idiopathic and not idiopathic
+- error rate of 25%
+```{r}
+justidio <- uveitisdataClean2 %>% 
+  mutate(idiopatic = (categorical=="idiopathic")) %>%
+  select(-categorical)
+justidio$idiopatic <- factor(justidio$idiopatic)
+
+justidioloc <- uveitisdataraw %>%
+  filter(categorical=="idiopathic")
+```
+
+```{r}
+set.seed(108)
+training.samples <- justidio$idiopatic %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data2  <- justidio[training.samples, ]
+test.data2 <- justidio[-training.samples, ]
+# Build the model
+model5 = tree(idiopatic~., data=justidio, subset=training.samples)
+# Make predictions and compute the R2, RMSE and MAE
+predictions <- model5 %>% predict(test.data2)
+plot(model5); text(model5, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model5))
+summary(justidio)
+
+```
+
+```{r}
+levels(justidio$location)
+```
+
+
+### 9.4.2 posterior diagnosis
+There are 341 people from 1075 with the location posterior. witch is the most common one. Lets take a closer look.
+The prediction with the tree model has only a error rate of 32%, with including diagnos the error value drops indeed at 5%, but this is unrealistic.
+```{r}
+posterior$categorical <- factor(posterior$categorical)
+posterior <- select(posterior,-diagnosis)
+set.seed(108)
+training.samples <- posterior$categorical %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- posterior[training.samples, ]
+test.data <- posterior[-training.samples, ]
+# Build the model
+model6 = tree(categorical~., data=posterior)
+predictions <- model6 %>% predict(test.data)
+plot(model6); text(model6, all=TRUE, cex=0.5)
+close.screen(all = TRUE)
+print(summary(model6))
+
+p5<- ggplot(test.data, aes(x=categorical)) + geom_histogram(binwidth=1, stat="count")
+p5
+summary(posterior$categorical)
+```
+
+# 9.5 random forest with clean data
+```{r}
+print(sum(is.na(uveitisdataClean2)))
+
+for(i in 1:ncol(uveitisdataClean2)){
+  uveitisdata[is.na(uveitisdataClean2[,i]), i] <- mean(uveitisdataClean2[,i])
+}
+print(sum(is.na(uveitisdataClean2)))
+
+```
+
+```{r}
+y <- uveitisdataClean2$categorical
+X <- select(uveitisdataClean2, -categorical)
+# Split data into training and test sets
+index <- createDataPartition(y, p=0.8, list=FALSE)
+index=sample(1:nrow(uveitisdataClean2), 700)
+X_train <- X[ index, ]
+X_test <- X[-index, ]
+y_train <- y[index]
+y_test<-y[-index]
+# Train the model
+regr <- randomForest(x = X_train, y = y_train , maxnodes = 5, ntree = 30, importance=TRUE)
+
+# Make prediction
+predictions <- predict(regr, X_test)
+
+result <- X_test
+result['categorical'] <- y_test
+result['prediction'] <- predictions
+
+head(result)
+
+
+summary(regr)
+imp <- importance(regr)
+as.data.frame(imp) %>%
+  arrange(desc(MeanDecreaseGini))
+result
+varImpPlot(regr)
+importance(regr)
+
+```
+
+### 9.5.1 true accuracy
+- error rate 53 %
+```{r}
+mC <- table(result$categorical,result$prediction)
+accuracy <- mean(result$categorical == result$prediction)
+
+print(mC)
+error <- mean(result$categorical != result$prediction)
+cat("error    :", error,"\n")
+cat("accuracy :",accuracy)
+```
+
+## 10.0 systemic
+A study describes a correlation betwee patients who do have granulumam(o_6 = 0), has a hight Lymphocytes(v13) and ANA() should be systemic(sacroidoisis), with a error rate of 40%
+```{r}
+#make a table with systemic or not
+sysP <- uveitisdata %>% 
+  mutate(systemic = (categorical=="systemic")) %>%
+  filter(v14>1) %>%
+  filter(v13<0) %>%
+  filter(o_6 == 1) %>%
+  select(v13, v14, systemic)
+
+summary(sysP)
+```
+
+
