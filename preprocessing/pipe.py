@@ -25,3 +25,43 @@ def rename(df, path):
     df = df.rename(columns=dict(zip(df.columns,col)))
     
     return df
+
+
+def preprocessing(cat_features, num_features, imputer):
+    '''
+    Creates preprocesser object that scales numeric features and onehotencodes categorical features
+    
+    Arguments
+    ---------
+    cat_features: list, list of categorical features
+    num_features: list, list of numerical features
+    imputer: dict, defines imputation method of SimpleImputer in Form {'categorical':{'strategy':'METHOD', 'fill_value'='METHOD'}, 'numerical':{'strategy':'METHOD'}}
+    
+    Returns
+    -------
+    df: df with encoded numeric and categorical features
+    '''
+    if num_features is not None:
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy=imputer['numeric']['strategy'])),
+            ('scaler', StandardScaler())])
+
+    if cat_features is not None:
+        categorical_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))])
+
+    if cat_features is None and num_features is not None:
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, num_features)])
+    elif cat_features is not None and num_features is  None:
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('cat', categorical_transformer, cat_features)])
+    elif cat_features is not None and num_features is not None:
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, num_features),
+                ('cat', categorical_transformer, cat_features)])
+    return preprocessor
