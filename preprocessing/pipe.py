@@ -89,7 +89,7 @@ def extract_num(df, column, errors='coerce', verbose=False):
     
     # filter out decimal numbers of column
     df[column] = df[column].astype('string')
-    df[column] = df[column].str.extract(r"(\d{1,}[.|,]\d{1,})", expand=False)
+    df[column] = df[column].str.extract(r"(\d{1,}[.|,]\d{1,}|\d*)", expand=False)
 
     # change feat to uniform uom (unit of measurment)
     df[column] = pd.to_numeric(df[column], errors=errors)
