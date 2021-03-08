@@ -65,3 +65,37 @@ def preprocessing(cat_features, num_features, imputer):
                 ('num', numeric_transformer, num_features),
                 ('cat', categorical_transformer, cat_features)])
     return preprocessor
+
+def extract_num(df, column, errors='coerce', verbose=False):
+    """
+    Extracts numerical values out of a column and returns the DataFrame with said column in numerical dtype
+    
+    Arguments
+    ---------
+    df: pandas.core.frame.DataFrame, Pandas DataFrame
+    column: str, Name of column whos numerical values should be extracted
+    errors: str, Determines how the function should handle errors (i.e nan's etc.), handled by pandas.to_numeric
+            - If 'raise', then invalid parsing will raise an exception.
+            - If 'coerce', then invalid parsing will be set as NaN.
+            - If 'ignore', then invalid parsing will return the input.
+        
+    Returns
+    -------
+    df: pandas.core.frame.DataFrame
+    """
+    if verbose:
+        print("Unique values before transformation:")
+        print(df[column].unique())
+    
+    # filter out decimal numbers of column
+    df[column] = df[column].astype('string')
+    df[column] = df[column].str.extract(r"(\d{1,}[.|,]\d{1,})", expand=False)
+
+    # change feat to uniform uom (unit of measurment)
+    df[column] = pd.to_numeric(df[column], errors=errors)
+                    
+    if verbose:
+        print("Unique values after transformation:")
+        print(df[column].unique())
+    
+    return df
