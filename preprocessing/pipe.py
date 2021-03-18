@@ -2,6 +2,37 @@ import pandas as pd
 import regex as re
 import numpy as np
 
+def read_data(rel_path, **kwargs):
+    """
+    Generalized function that reads a xlsx, csv, json or html data structure into a pandas dataframe
+
+    :argument rel_path: relative path to data to be read
+    :argument kwargs:  parameters for pd.read_"extension" functions
+    """
+    filename, file_extension = os.path.splitext(rel_path)
+    print(os.path.basename(rel_path) + " will be read")
+    if file_extension == ".xlsx": #when reading excel a usefull kwargs will be na_values = "dict of values to consider na"
+        df = pd.read_excel(rel_path, **kwargs)
+        print("reading filetype "+file_extension)
+    elif file_extension == ".csv":
+        df = pd.read_csv(rel_path, **kwargs)
+        print("reading filetype "+file_extension)
+    elif file_extension == ".json":
+        df = pd.read_json(rel_path, **kwargs)
+        print("reading filetype "+file_extension)
+    elif file_extension == ".html":
+        df = pd.read_html(rel_path, **kwargs)
+        print("reading filetype "+file_extension)
+    else:
+        print("Filetype not supported by function")
+        df = 0
+
+    if df.size != 0:
+        print("\nSuccessfully created table with ", df.size, "values and loaded as df")
+        print("The table is",df.shape[1], "wide and",df.shape[0],"long \n")
+
+    return df
+
 def rename(df, path):
     '''
     Renames columns according to a given list (from Excel)
