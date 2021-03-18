@@ -89,7 +89,7 @@ def extract_num(df, column, errors='coerce', verbose=False):
     
     # filter out decimal numbers of column
     df[column] = df[column].astype('string')
-    df[column] = df[column].str.extract(r"(\d{1,}[.|,]\d{1,}|\d*)", expand=False)
+    df[column] = df[column].str.extract(r"(\d+(?:\.\d+)?)", expand=False)
 
     # change feat to uniform uom (unit of measurment)
     df[column] = pd.to_numeric(df[column], errors=errors)
@@ -157,4 +157,44 @@ def drop_via_filter(df, filter_str ,verbose = False):
         print('Dropped the following columns:\n')
         print(ranges)
         
+    return df
+
+def preprocessing_loc(df, approach='multi', verbose= False):
+    """
+    Arguments
+    ---------
+    df: 
+    approach:  if 'multi': consolidates location feature into multiple locations ('anterior','posterior','pan...',etc.)
+               elif 'binary': collapses location feature into categories 'posterior_segment', 'anterior_segment'
+    
+    Return
+    ------
+    df:        df with collapsed loc-column
+    """
+    # assert approach parameter
+    assert approach in ['multi','binary'], "approach parameter is not in list ['multi','binary']"
+    
+    df['loc'] = df['loc'].str.lower().str.strip()
+    df['loc'] = df['loc'].replace({'pan':'panuveitis'})
+
+    
+    # collapse according to approach-parameter
+    if approach == 'multi':
+        pass
+    elif approach == 'binary':
+        df['loc'] = df['loc'].replace({'intermediate':'posterior_segment',
+                                       'posterior':'posterior_segment',
+                                       'panuveitis':'posterior_segment',
+                                       'anterior':'anterior_segment',
+                                       'scleritis':'anterior_segment'})
+        
+        # assert len(df['loc'].unique()) == 2, 'not all categories have been collapsed'
+
+        
+    df['loc'] = df['loc'].astype('category')
+    
+    if verbose:
+        print('Categories: \n')
+        print(df['loc'].value_counts())
+    
     return df
