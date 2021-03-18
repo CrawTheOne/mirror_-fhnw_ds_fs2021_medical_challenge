@@ -135,7 +135,7 @@ def problem_columns(matches, desired_dtype):
             print(key, "has unwanted dtype, keeping for transformation\n")
     return matches
 
-def coerce_then_problems(dframe, list_path, col_index, col_name_data_type, data_type, desired_dtype):
+def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, data_type, desired_dtype):
     """
     Coerce with convert_dtypes pandas function all columns from the list_of_totype. Those that fail to
     be converted into the desired dtype will be compiled into a dataframe for next steps
@@ -150,7 +150,7 @@ def coerce_then_problems(dframe, list_path, col_index, col_name_data_type, data_
     :return: a dataframe with values that couldn't be coerced to the desired data_type automagically via convert_dtypes()
     """
 
-    item_filter = list_of_totype(list_path, col_index, col_name_data_type, data_type)
+    item_filter = list_of_totype(list_path, col_index_name, col_data_type_name, data_type)
     matches = dframe.filter(items = item_filter).convert_dtypes()
     print(matches)
     matches = problem_columns(matches, desired_dtype)
