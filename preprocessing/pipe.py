@@ -99,3 +99,36 @@ def extract_num(df, column, errors='coerce', verbose=False):
         print(df[column].unique())
     
     return df
+
+def drop_nan_columns(df, nan_percentage, verbose = False):
+    """
+    Drop collumns if nan or missing values >= to nan_percentage
+    
+    Arguments
+    ---------
+    df:             pandas DataFrame
+    nan_percentage: float, in range [0,1]
+    verbose:        bool, default False, prints list of collumns that have been dropped if true
+    
+    
+    Return
+    ------
+    df:             pandas DataFrame without collumns that have nan_percentage missing values
+    """
+    assert 0 < nan_percentage <= 1, "nan_percentage not between 0 and 1"
+    
+    # get list of collumns and corresponding ratio of missing values
+    percent_missing = (df.isnull().sum() / len(df)).reset_index().rename(columns={0:'ratio'})
+    
+    #remove uom and range lists (these collumns are important for later preprocessing)
+    searchfor = ['uom', 'range']
+    percent_missing = percent_missing[~percent_missing['index'].str.contains('|'.join(searchfor))]
+    
+    # get list of collumns which have more than nan_percantage of missing values
+    drop_list = percent_missing.loc[percent_missing.ratio >= nan_percentage, 'index'].tolist()
+    
+    if verbose:
+        print('The following columns have been removed from the dataset:\n')
+        print(percent_missing.loc[percent_missing.ratio >= nan_percentage].sort_values(by='ratio', ascending = False))
+    
+    return df
