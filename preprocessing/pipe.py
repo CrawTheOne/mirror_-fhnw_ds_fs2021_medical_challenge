@@ -1,10 +1,8 @@
 import pandas as pd
 import regex as re
-<<<<<<< HEAD
 import os
-=======
 import numpy as np
->>>>>>> 1d9614b6c9f0eb5950e284b8356e9885270df9bf
+
 
 def read_data(rel_path, **kwargs):
     """
@@ -38,6 +36,7 @@ def read_data(rel_path, **kwargs):
         print("The table is",df.shape[1], "wide and",df.shape[0],"long \n")
 
     return df
+
 
 def rename(df, path):
     '''
@@ -104,6 +103,7 @@ def preprocessing(cat_features, num_features, imputer):
                 ('cat', categorical_transformer, cat_features)])
     return preprocessor
 
+
 def list_of_totype(list_path, col_index_name, col_data_type_name="data_type", data_type="numerical"):
     """
     Return list of columns, selected based on their data types from custom excel list
@@ -156,6 +156,7 @@ def coerce_then_problems(dframe, list_path, col_index, col_name_data_type, data_
     matches = problem_columns(matches, desired_dtype)
     return matches
 
+
 def extract_num(df, column, errors='coerce', verbose=False):
     """
     Extracts numerical values out of a column and returns the DataFrame with said column in numerical dtype
@@ -189,6 +190,7 @@ def extract_num(df, column, errors='coerce', verbose=False):
         print(df[column].unique())
     
     return df
+
 
 def drop_nan_columns(df, nan_percentage, verbose = False):
     """
@@ -226,6 +228,7 @@ def drop_nan_columns(df, nan_percentage, verbose = False):
     
     return df
 
+
 def drop_via_filter(df, filter_str ,verbose = False):
     """
     Drop collumns if nan or missing values >= to nan_percentage
@@ -248,6 +251,7 @@ def drop_via_filter(df, filter_str ,verbose = False):
         print(ranges)
         
     return df
+
 
 def preprocessing_loc(df, approach='multi', verbose= False):
     """
@@ -288,6 +292,7 @@ def preprocessing_loc(df, approach='multi', verbose= False):
         print(df['loc'].value_counts())
     
     return df
+
 
 def num_to_binary(df, column, cutoff):
     """
