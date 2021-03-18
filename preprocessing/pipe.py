@@ -1,5 +1,6 @@
 import pandas as pd
 import regex as re
+import numpy as np
 
 def rename(df, path):
     '''
@@ -197,4 +198,24 @@ def preprocessing_loc(df, approach='multi', verbose= False):
         print('Categories: \n')
         print(df['loc'].value_counts())
     
+    return df
+
+def num_to_binary(df, column, cutoff):
+    """
+    Creates a binary feature (0 and 1 values) out of a numerical feature
+    
+    Arguments
+    ---------
+    df:       pd.dataframe, DataFrame
+    column:   str, A string to select the column to transform
+    cutoff:   numeric, values at or below the cutoff will be 0, otherwise 1
+    
+    Returns
+    -------
+    df:       pd.dataframe, DataFrame where 'column' is replaced with a binarized version of said 'column'
+    """ 
+    # extract numerical values (strings with no digits = np.nan)
+    if(df[column].dtype != np.float64 or df[column].dtype != np.int64):
+        df = extract_num(df, column, errors='coerce', verbose=False)
+    df[column]= np.where(df[column].isna(), np.nan, np.where(df[column] <=20, 0, 1))
     return df
