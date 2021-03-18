@@ -135,3 +135,26 @@ def drop_nan_columns(df, nan_percentage, verbose = False):
     df = df.drop(drop_list, axis=1)
     
     return df
+
+def drop_via_filter(df, filter_str ,verbose = False):
+    """
+    Drop collumns if nan or missing values >= to nan_percentage
+    
+    Arguments
+    ---------
+    df:             pandas DataFrame
+    filter_str:     str, String that filters for a subset of colums to drop. eg. 'range' drops all columns containing the string 'range'
+    verbose:        bool, default False, prints list of collumns that have been dropped if true
+    
+    Return
+    ------
+    df:             pandas DataFrame without collumns that have nan_percentage missing values
+    """
+    ranges = df.filter(like=filter_str).columns # get list of columns with range 
+    df = df.drop(ranges, axis=1)
+    
+    if verbose:
+        print('Dropped the following columns:\n')
+        print(ranges)
+        
+    return df
