@@ -130,5 +130,8 @@ def drop_nan_columns(df, nan_percentage, verbose = False):
     if verbose:
         print('The following columns have been removed from the dataset:\n')
         print(percent_missing.loc[percent_missing.ratio >= nan_percentage].sort_values(by='ratio', ascending = False))
+        
+    # drop columns
+    df = df.drop(drop_list, axis=1)
     
     return df
