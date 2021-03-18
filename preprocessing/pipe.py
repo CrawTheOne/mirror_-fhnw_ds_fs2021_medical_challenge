@@ -1,12 +1,15 @@
 import pandas as pd
 import regex as re
+import os
 
 def read_data(rel_path, **kwargs):
     """
     Generalized function that reads a xlsx, csv, json or html data structure into a pandas dataframe
-
+    -----
     :argument rel_path: relative path to data to be read
-    :argument kwargs:  parameters for pd.read_"extension" functions
+    :argument kwargs:  parameters for pd.read_"file type" functions
+
+    :return: returns a pandas dataframe
     """
     filename, file_extension = os.path.splitext(rel_path)
     print(os.path.basename(rel_path) + " will be read")
@@ -96,6 +99,58 @@ def preprocessing(cat_features, num_features, imputer):
                 ('num', numeric_transformer, num_features),
                 ('cat', categorical_transformer, cat_features)])
     return preprocessor
+
+def list_of_totype(list_path, col_index_name, col_data_type_name="data_type", data_type="numerical"):
+    """
+    Return list of columns, selected based on their data types from custom excel list
+    -----
+    :param list_path: path of excel document to read data type from
+    :param col_index_name: index column to use (column name of data type)
+    :param col_data_type_name: name of column where data type is stored
+    :param data_type: type of data desired. Should be numerical, categorical, char or both (appelation for edge cases)
+
+    :return: returns a list of column names with the desired data type
+    """
+    col = pd.read_excel(list_path, index_col = col_index_name)[col_data_type_name] #get content of column with name data_type
+    col_to_type = col.where(col == data_type).dropna().index.tolist()
+    return col_to_type
+
+#this function is pretty useless alone, used in the next function
+def problem_columns(matches, desired_dtype):
+    """
+    Return all columns and their content that couldn't be correctly coerced to a desired dtype
+    :param matches: feeded from another function
+    :param desired_dtype: a list or string that contains the desired data_types that were transformed correctly
+    :return: returns a dataframe with all the problematic columns
+    """
+    for key, value in matches.iteritems():
+        if value.dtype in desired_dtype:
+            print("\n", key, "is desired", value.dtype, "and will be popped from problematic list \n")
+            matches.pop(key)
+        else:
+            print(key, "has unwanted dtype, keeping for transformation\n")
+    return matches
+
+def coerce_then_problems(dframe, list_path, col_index, col_name_data_type, data_type, desired_dtype):
+    """
+    Coerce with convert_dtypes pandas function all columns from the list_of_totype. Those that fail to
+    be converted into the desired dtype will be compiled into a dataframe for next steps
+    -----
+    :param dframe: dataframe to be checked and wrecked
+    :param list_path: path of excel document to read data type from
+    :param col_index: index column to use (column name of data type)
+    :param col_name_data_type: name of column where data type is stored
+    :param data_type: type of data desired. Should be numerical, categorical, char or both (appelation for edge cases)
+    :param desired_dtype: a list or string that contains the desired data_types that were transformed correctly
+
+    :return: a dataframe with values that couldn't be coerced to the desired data_type automagically via convert_dtypes()
+    """
+
+    item_filter = list_of_totype(list_path, col_index, col_name_data_type, data_type)
+    matches = dframe.filter(items = item_filter).convert_dtypes()
+    print(matches)
+    matches = problem_columns(matches, desired_dtype)
+    return matches
 
 def extract_num(df, column, errors='coerce', verbose=False):
     """
