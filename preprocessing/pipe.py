@@ -122,7 +122,7 @@ def extract_num(df, column, errors='coerce', verbose=False):
         print(df[column].unique())
     
     # filter out decimal numbers of column
-    df[column] = df[column].astype('string')
+    df[column] = df[column].astype('str')
     df[column] = df[column].str.extract(r"(\d+(?:\.\d+)?)", expand=False)
 
     # change feat to uniform uom (unit of measurment)
