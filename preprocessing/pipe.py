@@ -122,7 +122,7 @@ def extract_num(df, column, errors='coerce', verbose=False):
         print(df[column].unique())
     
     # filter out decimal numbers of column
-    df[column] = df[column].astype('string')
+    df[column] = df[column].astype('str')
     df[column] = df[column].str.extract(r"(\d+(?:\.\d+)?)", expand=False)
 
     # change feat to uniform uom (unit of measurment)
@@ -320,4 +320,41 @@ def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, 
     matches = problem_columns(matches, desired_dtype)
     return matches
 
+def neg_col_to_cat(df, columns, verbose=False):
+    """
+    Transform columns with majority of 'NEG' values into binary, categorical columns
+    -----
+    :param df: a pandas DataFrame
+    :param columns: list of strings, containing column names in df
+    :param verbose: bool, default False, prints value counts of transformed columns
+    
+    :return: input DataFrame with transformed columns
+    """
+    for col in columns:
+        if col == 'anti-ccp_ab':
+            df = pipe.num_to_binary(df, 'anti-ccp_ab', 20)
+            if verbose:
+                print(df[col].value_counts(dropna=False))
+        else:
+            df[col].replace(r'(see)', np.nan)
+            df[col] = np.where(df[col].isna(), np.nan, np.where(df[col] =='NEG', 0, 1))
+            df[col] = df[col].astype('str').astype('category')
+            if verbose:
+                print(df[col].value_counts(dropna=False))
 
+    return df
+
+def drop_uom_and_range(df, verbose=False):
+    """
+    Drop all columns which names contain 'uom' or 'range'
+    
+    :param df: pandas DataFrame
+    :param verbose: bool, default=False, prints list of remaining columns after transformation
+    
+    :return df: Returns input dataframe without columns containing str 'uom' or 'range'
+    """
+    df = df[df.columns.drop(list(df.filter(regex='uom|range')))]
+    if verbose: 
+        print(df.columns.tolist())
+
+    return df
