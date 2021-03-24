@@ -358,3 +358,27 @@ def drop_uom_and_range(df, verbose=False):
         print(df.columns.tolist())
 
     return df
+
+#iterate trough problem columns and extract numeric features
+def iter_columns_extract_num(df):
+    """
+
+    :param df:
+    :return:
+    """
+    for c in df.columns:
+        #print(c)
+        df = extract_num(df, str(c))
+        #print(problem_df.columns.dtype)
+        df = df.convert_dtypes()
+        print(df[c].dtypes)
+
+    return df
+
+#merge corrected columns onto dataframe
+def merge_corrected(original_df, corrected_df):
+    for c in corrected_df.columns:
+        #print(c, df1[c])
+        original_df[c] = corrected_df[c]
+
+    return original_df
