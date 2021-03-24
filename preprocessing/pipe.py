@@ -332,7 +332,7 @@ def neg_col_to_cat(df, columns, verbose=False):
     """
     for col in columns:
         if col == 'anti-ccp_ab':
-            df = pipe.num_to_binary(df, 'anti-ccp_ab', 20)
+            df = num_to_binary(df, 'anti-ccp_ab', 20)
             if verbose:
                 print(df[col].value_counts(dropna=False))
         else:
