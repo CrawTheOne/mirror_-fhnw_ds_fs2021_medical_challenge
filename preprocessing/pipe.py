@@ -2,6 +2,11 @@ import pandas as pd
 import regex as re
 import numpy as np
 import os
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
 
 def read_data(rel_path, **kwargs):
     """
@@ -61,7 +66,7 @@ def rename(df, path):
     return df
 
 
-def preprocessing(cat_features, num_features, imputer):
+def impute_and_encode(cat_features, num_features, imputer):
     '''
     Creates preprocesser object that scales numeric features and onehotencodes categorical features
     
@@ -77,12 +82,12 @@ def preprocessing(cat_features, num_features, imputer):
     '''
     if num_features is not None:
         numeric_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy=imputer['numeric']['strategy'])),
+            ('imputer', SimpleImputer(strategy=imputer['numerical']['strategy'], fill_value=imputer['numerical']['fill_value'])),
             ('scaler', StandardScaler())])
 
     if cat_features is not None:
         categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value'])),
             ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))])
 
     if cat_features is None and num_features is not None:
@@ -333,6 +338,7 @@ def neg_col_to_cat(df, columns, verbose=False):
     for col in columns:
         if col == 'anti-ccp_ab':
             df = num_to_binary(df, 'anti-ccp_ab', 20)
+            df[col] = df[col].astype('category')
             if verbose:
                 print(df[col].value_counts(dropna=False))
         else:
