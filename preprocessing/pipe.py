@@ -235,7 +235,6 @@ def preprocessing_loc(df, approach='multi', verbose= False):
     if verbose:
         print('Categories: \n')
         print(df['loc'].value_counts())
-    
     return df
 
 def num_to_binary(df, column, cutoff):
@@ -284,7 +283,7 @@ def list_of_totype(list_path, col_index_name, col_data_type_name="data_type", da
 
 
 #this function is pretty useless alone
-def problem_columns(matches, desired_dtype):
+def problem_columns(matches, desired_dtype, verbose=False):
     """
     Return all columns and their content that couldn't be correctly coerced to a desired dtype
     -----
@@ -296,15 +295,17 @@ def problem_columns(matches, desired_dtype):
     for key, value in matches.iteritems():
         #print(key, value)
         if value.dtype in desired_dtype:
-            print("\n", key, "is desired", value.dtype, "and will be popped from problematic list \n")
+            if verbose:
+                print("\n", key, "is desired", value.dtype, "and will be popped from problematic list \n")
             matches.pop(key)
         else:
-            print(key, "has unwanted dtype, keeping for transformation")
+            if verbose: 
+                print(key, "has unwanted dtype, keeping for transformation")
     return matches
 
 
 #function to coerce columns to desired datatype
-def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, data_type, desired_dtype):
+def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, data_type, desired_dtype, verbose=False):
     """
     Coerce with convert_dtypes pandas function all columns from the list_of_totype. Those that fail to
     be converted into the desired dtype will be compiled into a dataframe for next steps
@@ -321,7 +322,8 @@ def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, 
 
     item_filter = list_of_totype(list_path, col_index_name, col_data_type_name, data_type)
     matches = dframe.filter(items = item_filter).convert_dtypes()
-    print(matches)
+    if verbose:
+        print(matches)
     matches = problem_columns(matches, desired_dtype)
     return matches
 
@@ -388,3 +390,47 @@ def merge_corrected(original_df, corrected_df):
         original_df[c] = corrected_df[c]
 
     return original_df
+
+def preprocessing_numeric(df):
+    
+    list_path = "../data/col_names&data_type-Copy1.xlsx"
+    col_index_name = "new col name"
+    col_data_type_name = "data_type"
+    data_type = "numerical"
+
+    desired_dtype = ["int64", "float64"]
+
+    #return list of all columns with specific dtype
+    num_columns = list_of_totype(list_path, col_index_name, col_data_type_name, data_type)
+    # print(num_columns)
+
+    #create dataframe with columns that contain a mix of strings and numerical values
+    problem_df = coerce_then_problems(df, list_path, col_index_name, col_data_type_name, data_type, desired_dtype, verbose=False)
+    problem_columns = list(problem_df)
+    # print(problem_columns)
+
+    corrected_df = iter_columns_extract_num(problem_df)
+
+    #foo = pipe.coerce_then_problems(df, list_path, col_index_name, col_data_type_name, data_type, desired_dtype)
+
+    df = merge_corrected(df, corrected_df)
+    
+    return df
+
+def preprocessing_cat(df):
+    df.cat = df.cat.str.lower().str.strip().astype('category')
+    if df.cat.isna().sum() == 1:
+        df.cat = df.cat.fillna(value='not_uveitis')
+    df.loc[df['cat'].str.contains('masquerade', case=False), 'cat'] = 'not_uveitis'
+    df.drop(df[df.cat == 'scleritis'].index, inplace = True)
+    return df
+
+def preprocessing_specific(df):
+    df.specific_diagnosis = df.specific_diagnosis.str.lower().astype('category')
+    df.loc[df['specific_diagnosis'].str.contains('masquerade', case=False), 'specific_diagnosis'] = 'not_uveitis'
+
+    count = df.specific_diagnosis.value_counts().reset_index().rename(columns={'index':'diagnosis','specific_diagnosis':'count'})
+    diag_less_10 = count[count['count'] <= 10].diagnosis.tolist()
+    df.specific_diagnosis = df.specific_diagnosis.replace({x:'other' for x in diag_less_10})
+    df.specific_diagnosis = df.specific_diagnosis.astype('category')
+    return df
