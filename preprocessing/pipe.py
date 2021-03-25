@@ -377,7 +377,7 @@ def iter_columns_extract_num(df):
         df = extract_num(df, str(c))
         #print(problem_df.columns.dtype)
         df = df.convert_dtypes()
-        print(df[c].dtypes)
+        #print(df[c].dtypes)
 
     return df
 
