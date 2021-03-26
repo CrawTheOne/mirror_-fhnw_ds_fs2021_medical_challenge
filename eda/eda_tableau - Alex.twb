@@ -1,0 +1,2475 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20211.21.0320.1853                               -->
+<workbook original-version='18.1' source-build='2021.1.0 (20211.21.0320.1853)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='uveitis_data' inline='true' name='federated.0y507ip14eb0nr1dipzzq0k3sbgg' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='uveitis_data' name='excel-direct.0j4ckyh0eixo5212oubao0drv3gu'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='D:/Drive/FHNW/zaRepos/fhnw_ds_fs2021_medical_challenge/data/uveitis_data.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.0j4ckyh0eixo5212oubao0drv3gu' name='Consolidated_Starting_with_Olde' table='[Consolidated_Starting_with_Olde$]' type='table'>
+          <columns gridOrigin='A1:DN1076:no:A1:DN1076:0' header='yes' outcome='2'>
+            <column datatype='integer' name='SUBJECT ID' ordinal='0' />
+            <column datatype='string' name='Gender' ordinal='1' />
+            <column datatype='string' name='Race' ordinal='2' />
+            <column datatype='string' name='Location' ordinal='3' />
+            <column datatype='string' name='Categorical' ordinal='4' />
+            <column datatype='string' name='Other (RV, Choroidal granuloma, pars planitis)' ordinal='5' />
+            <column datatype='string' name='EHR DIAGNOSIS' ordinal='6' />
+            <column datatype='string' name='Specific Diagnosis' ordinal='7' />
+            <column datatype='string' name='notes' ordinal='8' />
+            <column datatype='string' name='AC Abn Od Cells' ordinal='9' />
+            <column datatype='string' name='AC Abn Os Cells' ordinal='10' />
+            <column datatype='string' name='Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='11' />
+            <column datatype='string' name='Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='12' />
+            <column datatype='string' name='Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='13' />
+            <column datatype='string' name='Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='14' />
+            <column datatype='real' name='Calcium (Blood)' ordinal='15' />
+            <column datatype='string' name='UOM' ordinal='16' />
+            <column datatype='string' name='Range' ordinal='17' />
+            <column datatype='string' name='Lactate Dehydrogenase (LDH) (Blood)' ordinal='18' />
+            <column datatype='string' name='UOM1' ordinal='19' />
+            <column datatype='string' name='Range1' ordinal='20' />
+            <column datatype='string' name='C-Reactive Protein, Normal and High Sensitivity (Blood)' ordinal='21' />
+            <column datatype='string' name='UOM2' ordinal='22' />
+            <column datatype='string' name='Range2' ordinal='23' />
+            <column datatype='real' name='WBC (Blood)' ordinal='24' />
+            <column datatype='string' name='UOM3' ordinal='25' />
+            <column datatype='string' name='Range3' ordinal='26' />
+            <column datatype='real' name='RBC (Blood)' ordinal='27' />
+            <column datatype='string' name='UOM4' ordinal='28' />
+            <column datatype='string' name='Range4' ordinal='29' />
+            <column datatype='real' name='Hemoglobin (Blood)' ordinal='30' />
+            <column datatype='string' name='UOM5' ordinal='31' />
+            <column datatype='string' name='Range5' ordinal='32' />
+            <column datatype='real' name='Hematocrit (Blood)' ordinal='33' />
+            <column datatype='string' name='UOM6' ordinal='34' />
+            <column datatype='string' name='Range6' ordinal='35' />
+            <column datatype='real' name='MCV (Blood)' ordinal='36' />
+            <column datatype='string' name='UOM7' ordinal='37' />
+            <column datatype='string' name='Range7' ordinal='38' />
+            <column datatype='real' name='MCH (Blood)' ordinal='39' />
+            <column datatype='string' name='UOM8' ordinal='40' />
+            <column datatype='string' name='Range8' ordinal='41' />
+            <column datatype='real' name='MCHC (Blood)' ordinal='42' />
+            <column datatype='string' name='UOM9' ordinal='43' />
+            <column datatype='string' name='Range9' ordinal='44' />
+            <column datatype='real' name='RDW (Blood)' ordinal='45' />
+            <column datatype='string' name='UOM10' ordinal='46' />
+            <column datatype='string' name='Range10' ordinal='47' />
+            <column datatype='integer' name='Platelet Count (Blood)' ordinal='48' />
+            <column datatype='string' name='UOM11' ordinal='49' />
+            <column datatype='string' name='Range11' ordinal='50' />
+            <column datatype='real' name='Neutrophil % (Blood)' ordinal='51' />
+            <column datatype='string' name='UOM12' ordinal='52' />
+            <column datatype='string' name='Range12' ordinal='53' />
+            <column datatype='real' name='Lymphocytes % (Blood)' ordinal='54' />
+            <column datatype='string' name='UOM13' ordinal='55' />
+            <column datatype='string' name='Range13' ordinal='56' />
+            <column datatype='string' name='Angiotensin Conv#Enzyme (Blood)' ordinal='57' />
+            <column datatype='string' name='UOM14' ordinal='58' />
+            <column datatype='string' name='Range14' ordinal='59' />
+            <column datatype='real' name='Beta-2-Microglobulin (Blood)' ordinal='60' />
+            <column datatype='string' name='UOM15' ordinal='61' />
+            <column datatype='string' name='Range15' ordinal='62' />
+            <column datatype='string' name='Lupus Anticoagulant (Blood)' ordinal='63' />
+            <column datatype='string' name='Lysozyme, Plasma (Blood)' ordinal='64' />
+            <column datatype='string' name='UOM18' ordinal='65' />
+            <column datatype='string' name='Range18' ordinal='66' />
+            <column datatype='string' name='Anti-CCP Ab (Blood)' ordinal='67' />
+            <column datatype='string' name='UOM21' ordinal='68' />
+            <column datatype='string' name='Range21' ordinal='69' />
+            <column datatype='string' name='Anti-Dnase B (Blood)' ordinal='70' />
+            <column datatype='string' name='UOM22' ordinal='71' />
+            <column datatype='string' name='Range22' ordinal='72' />
+            <column datatype='string' name='Anti-ENA Screen (Blood)' ordinal='73' />
+            <column datatype='string' name='UOM23' ordinal='74' />
+            <column datatype='string' name='Range23' ordinal='75' />
+            <column datatype='string' name='Antinuclear Antibody (ANA) (Blood)' ordinal='76' />
+            <column datatype='string' name='UOM24' ordinal='77' />
+            <column datatype='string' name='Range24' ordinal='78' />
+            <column datatype='real' name='Complement C3 (Blood)' ordinal='79' />
+            <column datatype='string' name='UOM25' ordinal='80' />
+            <column datatype='string' name='Range25' ordinal='81' />
+            <column datatype='string' name='Complement C4 (Blood)' ordinal='82' />
+            <column datatype='string' name='UOM26' ordinal='83' />
+            <column datatype='string' name='Range26' ordinal='84' />
+            <column datatype='string' name='DNA Double-Stranded Ab (Blood)' ordinal='85' />
+            <column datatype='string' name='UOM27' ordinal='86' />
+            <column datatype='string' name='Range27' ordinal='87' />
+            <column datatype='string' name='HLA-A* (Blood)' ordinal='88' />
+            <column datatype='integer' name='HLA_A_1' ordinal='89' />
+            <column datatype='integer' name='HLA_A_2' ordinal='90' />
+            <column datatype='string' name='HLA-B* (Blood)' ordinal='91' />
+            <column datatype='integer' name='HLA_B_1' ordinal='92' />
+            <column datatype='integer' name='HLA_B_2' ordinal='93' />
+            <column datatype='string' name='HLA-Cw* (Blood)' ordinal='94' />
+            <column datatype='integer' name='HLA_C_1' ordinal='95' />
+            <column datatype='integer' name='HLA_C_2' ordinal='96' />
+            <column datatype='string' name='HLA-DRB1* (Blood)' ordinal='97' />
+            <column datatype='integer' name='HLA_DRB1_1' ordinal='98' />
+            <column datatype='integer' name='HLA_DRB1_2' ordinal='99' />
+            <column datatype='string' name='HLA-DQB1* / DQ* (Blood)' ordinal='100' />
+            <column datatype='integer' name='HLA_DQ_1' ordinal='101' />
+            <column datatype='integer' name='HLA_DQ_2' ordinal='102' />
+            <column datatype='string' name='HLA-DRB_* (Blood)' ordinal='103' />
+            <column datatype='integer' name='HLA_DRB*_1' ordinal='104' />
+            <column datatype='integer' name='HLA_DRB*_2' ordinal='105' />
+            <column datatype='string' name='Myeloperoxidase Ab (Blood)' ordinal='106' />
+            <column datatype='string' name='UOM34' ordinal='107' />
+            <column datatype='string' name='Range34' ordinal='108' />
+            <column datatype='string' name='Proteinase-3 Antibodies (Blood)' ordinal='109' />
+            <column datatype='string' name='UOM35' ordinal='110' />
+            <column datatype='string' name='Range35' ordinal='111' />
+            <column datatype='string' name='Rheumatoid Factor (Blood)' ordinal='112' />
+            <column datatype='string' name='UOM36' ordinal='113' />
+            <column datatype='string' name='Range36' ordinal='114' />
+            <column datatype='string' name='HBc (HepB core) Ab (Blood)' ordinal='115' />
+            <column datatype='string' name='HBs (HepB surface) Ag (Blood)' ordinal='116' />
+            <column datatype='string' name='HCV (HepC) Ab (Blood)' ordinal='117' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='excel-direct.0j4ckyh0eixo5212oubao0drv3gu' name='Consolidated_Starting_with_Olde' table='[Consolidated_Starting_with_Olde$]' type='table'>
+          <columns gridOrigin='A1:DN1076:no:A1:DN1076:0' header='yes' outcome='2'>
+            <column datatype='integer' name='SUBJECT ID' ordinal='0' />
+            <column datatype='string' name='Gender' ordinal='1' />
+            <column datatype='string' name='Race' ordinal='2' />
+            <column datatype='string' name='Location' ordinal='3' />
+            <column datatype='string' name='Categorical' ordinal='4' />
+            <column datatype='string' name='Other (RV, Choroidal granuloma, pars planitis)' ordinal='5' />
+            <column datatype='string' name='EHR DIAGNOSIS' ordinal='6' />
+            <column datatype='string' name='Specific Diagnosis' ordinal='7' />
+            <column datatype='string' name='notes' ordinal='8' />
+            <column datatype='string' name='AC Abn Od Cells' ordinal='9' />
+            <column datatype='string' name='AC Abn Os Cells' ordinal='10' />
+            <column datatype='string' name='Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='11' />
+            <column datatype='string' name='Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='12' />
+            <column datatype='string' name='Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='13' />
+            <column datatype='string' name='Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='14' />
+            <column datatype='real' name='Calcium (Blood)' ordinal='15' />
+            <column datatype='string' name='UOM' ordinal='16' />
+            <column datatype='string' name='Range' ordinal='17' />
+            <column datatype='string' name='Lactate Dehydrogenase (LDH) (Blood)' ordinal='18' />
+            <column datatype='string' name='UOM1' ordinal='19' />
+            <column datatype='string' name='Range1' ordinal='20' />
+            <column datatype='string' name='C-Reactive Protein, Normal and High Sensitivity (Blood)' ordinal='21' />
+            <column datatype='string' name='UOM2' ordinal='22' />
+            <column datatype='string' name='Range2' ordinal='23' />
+            <column datatype='real' name='WBC (Blood)' ordinal='24' />
+            <column datatype='string' name='UOM3' ordinal='25' />
+            <column datatype='string' name='Range3' ordinal='26' />
+            <column datatype='real' name='RBC (Blood)' ordinal='27' />
+            <column datatype='string' name='UOM4' ordinal='28' />
+            <column datatype='string' name='Range4' ordinal='29' />
+            <column datatype='real' name='Hemoglobin (Blood)' ordinal='30' />
+            <column datatype='string' name='UOM5' ordinal='31' />
+            <column datatype='string' name='Range5' ordinal='32' />
+            <column datatype='real' name='Hematocrit (Blood)' ordinal='33' />
+            <column datatype='string' name='UOM6' ordinal='34' />
+            <column datatype='string' name='Range6' ordinal='35' />
+            <column datatype='real' name='MCV (Blood)' ordinal='36' />
+            <column datatype='string' name='UOM7' ordinal='37' />
+            <column datatype='string' name='Range7' ordinal='38' />
+            <column datatype='real' name='MCH (Blood)' ordinal='39' />
+            <column datatype='string' name='UOM8' ordinal='40' />
+            <column datatype='string' name='Range8' ordinal='41' />
+            <column datatype='real' name='MCHC (Blood)' ordinal='42' />
+            <column datatype='string' name='UOM9' ordinal='43' />
+            <column datatype='string' name='Range9' ordinal='44' />
+            <column datatype='real' name='RDW (Blood)' ordinal='45' />
+            <column datatype='string' name='UOM10' ordinal='46' />
+            <column datatype='string' name='Range10' ordinal='47' />
+            <column datatype='integer' name='Platelet Count (Blood)' ordinal='48' />
+            <column datatype='string' name='UOM11' ordinal='49' />
+            <column datatype='string' name='Range11' ordinal='50' />
+            <column datatype='real' name='Neutrophil % (Blood)' ordinal='51' />
+            <column datatype='string' name='UOM12' ordinal='52' />
+            <column datatype='string' name='Range12' ordinal='53' />
+            <column datatype='real' name='Lymphocytes % (Blood)' ordinal='54' />
+            <column datatype='string' name='UOM13' ordinal='55' />
+            <column datatype='string' name='Range13' ordinal='56' />
+            <column datatype='string' name='Angiotensin Conv#Enzyme (Blood)' ordinal='57' />
+            <column datatype='string' name='UOM14' ordinal='58' />
+            <column datatype='string' name='Range14' ordinal='59' />
+            <column datatype='real' name='Beta-2-Microglobulin (Blood)' ordinal='60' />
+            <column datatype='string' name='UOM15' ordinal='61' />
+            <column datatype='string' name='Range15' ordinal='62' />
+            <column datatype='string' name='Lupus Anticoagulant (Blood)' ordinal='63' />
+            <column datatype='string' name='Lysozyme, Plasma (Blood)' ordinal='64' />
+            <column datatype='string' name='UOM18' ordinal='65' />
+            <column datatype='string' name='Range18' ordinal='66' />
+            <column datatype='string' name='Anti-CCP Ab (Blood)' ordinal='67' />
+            <column datatype='string' name='UOM21' ordinal='68' />
+            <column datatype='string' name='Range21' ordinal='69' />
+            <column datatype='string' name='Anti-Dnase B (Blood)' ordinal='70' />
+            <column datatype='string' name='UOM22' ordinal='71' />
+            <column datatype='string' name='Range22' ordinal='72' />
+            <column datatype='string' name='Anti-ENA Screen (Blood)' ordinal='73' />
+            <column datatype='string' name='UOM23' ordinal='74' />
+            <column datatype='string' name='Range23' ordinal='75' />
+            <column datatype='string' name='Antinuclear Antibody (ANA) (Blood)' ordinal='76' />
+            <column datatype='string' name='UOM24' ordinal='77' />
+            <column datatype='string' name='Range24' ordinal='78' />
+            <column datatype='real' name='Complement C3 (Blood)' ordinal='79' />
+            <column datatype='string' name='UOM25' ordinal='80' />
+            <column datatype='string' name='Range25' ordinal='81' />
+            <column datatype='string' name='Complement C4 (Blood)' ordinal='82' />
+            <column datatype='string' name='UOM26' ordinal='83' />
+            <column datatype='string' name='Range26' ordinal='84' />
+            <column datatype='string' name='DNA Double-Stranded Ab (Blood)' ordinal='85' />
+            <column datatype='string' name='UOM27' ordinal='86' />
+            <column datatype='string' name='Range27' ordinal='87' />
+            <column datatype='string' name='HLA-A* (Blood)' ordinal='88' />
+            <column datatype='integer' name='HLA_A_1' ordinal='89' />
+            <column datatype='integer' name='HLA_A_2' ordinal='90' />
+            <column datatype='string' name='HLA-B* (Blood)' ordinal='91' />
+            <column datatype='integer' name='HLA_B_1' ordinal='92' />
+            <column datatype='integer' name='HLA_B_2' ordinal='93' />
+            <column datatype='string' name='HLA-Cw* (Blood)' ordinal='94' />
+            <column datatype='integer' name='HLA_C_1' ordinal='95' />
+            <column datatype='integer' name='HLA_C_2' ordinal='96' />
+            <column datatype='string' name='HLA-DRB1* (Blood)' ordinal='97' />
+            <column datatype='integer' name='HLA_DRB1_1' ordinal='98' />
+            <column datatype='integer' name='HLA_DRB1_2' ordinal='99' />
+            <column datatype='string' name='HLA-DQB1* / DQ* (Blood)' ordinal='100' />
+            <column datatype='integer' name='HLA_DQ_1' ordinal='101' />
+            <column datatype='integer' name='HLA_DQ_2' ordinal='102' />
+            <column datatype='string' name='HLA-DRB_* (Blood)' ordinal='103' />
+            <column datatype='integer' name='HLA_DRB*_1' ordinal='104' />
+            <column datatype='integer' name='HLA_DRB*_2' ordinal='105' />
+            <column datatype='string' name='Myeloperoxidase Ab (Blood)' ordinal='106' />
+            <column datatype='string' name='UOM34' ordinal='107' />
+            <column datatype='string' name='Range34' ordinal='108' />
+            <column datatype='string' name='Proteinase-3 Antibodies (Blood)' ordinal='109' />
+            <column datatype='string' name='UOM35' ordinal='110' />
+            <column datatype='string' name='Range35' ordinal='111' />
+            <column datatype='string' name='Rheumatoid Factor (Blood)' ordinal='112' />
+            <column datatype='string' name='UOM36' ordinal='113' />
+            <column datatype='string' name='Range36' ordinal='114' />
+            <column datatype='string' name='HBc (HepB core) Ab (Blood)' ordinal='115' />
+            <column datatype='string' name='HBs (HepB surface) Ag (Blood)' ordinal='116' />
+            <column datatype='string' name='HCV (HepC) Ab (Blood)' ordinal='117' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:DN1076:no:A1:DN1076:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SUBJECT ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[SUBJECT ID]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>SUBJECT ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Gender</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Gender]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Gender</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Race</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Race]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Race</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Location</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Location]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Location</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Categorical</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Categorical]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Categorical</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Other (RV, Choroidal granuloma, pars planitis)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Other (RV, Choroidal granuloma, pars planitis)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Other (RV, Choroidal granuloma, pars planitis)</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>EHR DIAGNOSIS</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[EHR DIAGNOSIS]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>EHR DIAGNOSIS</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Specific Diagnosis</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Specific Diagnosis]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Specific Diagnosis</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>notes</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[notes]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>notes</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AC Abn Od Cells</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[AC Abn Od Cells]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>AC Abn Od Cells</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AC Abn Os Cells</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[AC Abn Os Cells]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>AC Abn Os Cells</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Calcium (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Calcium (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Calcium (Blood)</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Lactate Dehydrogenase (LDH) (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Lactate Dehydrogenase (LDH) (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Lactate Dehydrogenase (LDH) (Blood)</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM1</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM1</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range1</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range1</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>C-Reactive Protein, Normal and High Sensitivity (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[C-Reactive Protein, Normal and High Sensitivity (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>C-Reactive Protein, Normal and High Sensitivity (Blood)</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM2</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM2</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range2</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range2</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>WBC (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[WBC (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>WBC (Blood)</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM3</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM3]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM3</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range3</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range3]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range3</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RBC (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[RBC (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>RBC (Blood)</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM4</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM4]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM4</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range4</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range4]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range4</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Hemoglobin (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Hemoglobin (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Hemoglobin (Blood)</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM5</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM5]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM5</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range5</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range5]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range5</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Hematocrit (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Hematocrit (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Hematocrit (Blood)</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM6</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM6]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM6</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range6</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range6]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range6</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MCV (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MCV (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>MCV (Blood)</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM7</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM7]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM7</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range7</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range7]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range7</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MCH (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MCH (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>MCH (Blood)</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM8</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM8]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM8</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range8</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range8]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range8</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MCHC (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MCHC (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>MCHC (Blood)</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM9</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM9]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM9</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range9</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range9]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range9</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RDW (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[RDW (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>RDW (Blood)</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM10</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM10]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM10</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range10</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range10]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range10</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Platelet Count (Blood)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Platelet Count (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Platelet Count (Blood)</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM11</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM11]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM11</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range11</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range11]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range11</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Neutrophil % (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Neutrophil % (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Neutrophil % (Blood)</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM12</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM12]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM12</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range12</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range12]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range12</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Lymphocytes % (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Lymphocytes % (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Lymphocytes % (Blood)</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM13</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM13]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM13</remote-alias>
+            <ordinal>55</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range13</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range13]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range13</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Angiotensin Conv#Enzyme (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Angiotensin Conv#Enzyme (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Angiotensin Conv#Enzyme (Blood)</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM14</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM14]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM14</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range14</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range14]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range14</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Beta-2-Microglobulin (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Beta-2-Microglobulin (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Beta-2-Microglobulin (Blood)</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM15</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM15]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM15</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range15</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range15]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range15</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Lupus Anticoagulant (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Lupus Anticoagulant (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Lupus Anticoagulant (Blood)</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Lysozyme, Plasma (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Lysozyme, Plasma (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Lysozyme, Plasma (Blood)</remote-alias>
+            <ordinal>64</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM18</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM18]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM18</remote-alias>
+            <ordinal>65</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range18</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range18]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range18</remote-alias>
+            <ordinal>66</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Anti-CCP Ab (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Anti-CCP Ab (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Anti-CCP Ab (Blood)</remote-alias>
+            <ordinal>67</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM21</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM21]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM21</remote-alias>
+            <ordinal>68</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range21</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range21]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range21</remote-alias>
+            <ordinal>69</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Anti-Dnase B (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Anti-Dnase B (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Anti-Dnase B (Blood)</remote-alias>
+            <ordinal>70</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM22</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM22]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM22</remote-alias>
+            <ordinal>71</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range22</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range22]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range22</remote-alias>
+            <ordinal>72</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Anti-ENA Screen (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Anti-ENA Screen (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Anti-ENA Screen (Blood)</remote-alias>
+            <ordinal>73</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM23</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM23]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM23</remote-alias>
+            <ordinal>74</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range23</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range23]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range23</remote-alias>
+            <ordinal>75</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Antinuclear Antibody (ANA) (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Antinuclear Antibody (ANA) (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Antinuclear Antibody (ANA) (Blood)</remote-alias>
+            <ordinal>76</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM24</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM24]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM24</remote-alias>
+            <ordinal>77</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range24</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range24]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range24</remote-alias>
+            <ordinal>78</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Complement C3 (Blood)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Complement C3 (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Complement C3 (Blood)</remote-alias>
+            <ordinal>79</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM25</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM25]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM25</remote-alias>
+            <ordinal>80</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range25</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range25]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range25</remote-alias>
+            <ordinal>81</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Complement C4 (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Complement C4 (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Complement C4 (Blood)</remote-alias>
+            <ordinal>82</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM26</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM26]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM26</remote-alias>
+            <ordinal>83</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range26</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range26]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range26</remote-alias>
+            <ordinal>84</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>DNA Double-Stranded Ab (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[DNA Double-Stranded Ab (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>DNA Double-Stranded Ab (Blood)</remote-alias>
+            <ordinal>85</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM27</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM27]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM27</remote-alias>
+            <ordinal>86</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range27</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range27]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range27</remote-alias>
+            <ordinal>87</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-A* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-A* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-A* (Blood)</remote-alias>
+            <ordinal>88</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_A_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_A_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_A_1</remote-alias>
+            <ordinal>89</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_A_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_A_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_A_2</remote-alias>
+            <ordinal>90</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-B* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-B* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-B* (Blood)</remote-alias>
+            <ordinal>91</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_B_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_B_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_B_1</remote-alias>
+            <ordinal>92</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_B_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_B_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_B_2</remote-alias>
+            <ordinal>93</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-Cw* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-Cw* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-Cw* (Blood)</remote-alias>
+            <ordinal>94</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_C_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_C_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_C_1</remote-alias>
+            <ordinal>95</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_C_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_C_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_C_2</remote-alias>
+            <ordinal>96</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-DRB1* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-DRB1* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-DRB1* (Blood)</remote-alias>
+            <ordinal>97</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DRB1_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DRB1_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DRB1_1</remote-alias>
+            <ordinal>98</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DRB1_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DRB1_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DRB1_2</remote-alias>
+            <ordinal>99</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-DQB1* / DQ* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-DQB1* / DQ* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-DQB1* / DQ* (Blood)</remote-alias>
+            <ordinal>100</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DQ_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DQ_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DQ_1</remote-alias>
+            <ordinal>101</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DQ_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DQ_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DQ_2</remote-alias>
+            <ordinal>102</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA-DRB_* (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HLA-DRB_* (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA-DRB_* (Blood)</remote-alias>
+            <ordinal>103</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DRB*_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DRB*_1]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DRB*_1</remote-alias>
+            <ordinal>104</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HLA_DRB*_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HLA_DRB*_2]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HLA_DRB*_2</remote-alias>
+            <ordinal>105</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Myeloperoxidase Ab (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Myeloperoxidase Ab (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Myeloperoxidase Ab (Blood)</remote-alias>
+            <ordinal>106</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM34</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM34]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM34</remote-alias>
+            <ordinal>107</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range34</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range34]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range34</remote-alias>
+            <ordinal>108</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Proteinase-3 Antibodies (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Proteinase-3 Antibodies (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Proteinase-3 Antibodies (Blood)</remote-alias>
+            <ordinal>109</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM35</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM35]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM35</remote-alias>
+            <ordinal>110</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range35</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range35]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range35</remote-alias>
+            <ordinal>111</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rheumatoid Factor (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Rheumatoid Factor (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Rheumatoid Factor (Blood)</remote-alias>
+            <ordinal>112</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>UOM36</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[UOM36]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>UOM36</remote-alias>
+            <ordinal>113</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Range36</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Range36]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>Range36</remote-alias>
+            <ordinal>114</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HBc (HepB core) Ab (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HBc (HepB core) Ab (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HBc (HepB core) Ab (Blood)</remote-alias>
+            <ordinal>115</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HBs (HepB surface) Ag (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HBs (HepB surface) Ag (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HBs (HepB surface) Ag (Blood)</remote-alias>
+            <ordinal>116</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HCV (HepC) Ab (Blood)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[HCV (HepC) Ab (Blood)]</local-name>
+            <parent-name>[Consolidated_Starting_with_Olde]</parent-name>
+            <remote-alias>HCV (HepC) Ab (Blood)</remote-alias>
+            <ordinal>117</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Ehr Diagnosis' datatype='string' name='[EHR DIAGNOSIS]' role='dimension' type='nominal' />
+      <column caption='HLA-DRB * (Blood)' datatype='string' name='[HLA-DRB_* (Blood)]' role='dimension' type='nominal' />
+      <column caption='Hla A 1' datatype='integer' name='[HLA_A_1]' role='measure' type='quantitative' />
+      <column caption='Hla A 2' datatype='integer' name='[HLA_A_2]' role='measure' type='quantitative' />
+      <column caption='Hla B 1' datatype='integer' name='[HLA_B_1]' role='measure' type='quantitative' />
+      <column caption='Hla B 2' datatype='integer' name='[HLA_B_2]' role='measure' type='quantitative' />
+      <column caption='Hla C 1' datatype='integer' name='[HLA_C_1]' role='measure' type='quantitative' />
+      <column caption='Hla C 2' datatype='integer' name='[HLA_C_2]' role='measure' type='quantitative' />
+      <column caption='Hla Dq 1' datatype='integer' name='[HLA_DQ_1]' role='measure' type='quantitative' />
+      <column caption='Hla Dq 2' datatype='integer' name='[HLA_DQ_2]' role='measure' type='quantitative' />
+      <column caption='Hla Drb* 1' datatype='integer' name='[HLA_DRB*_1]' role='measure' type='quantitative' />
+      <column caption='Hla Drb* 2' datatype='integer' name='[HLA_DRB*_2]' role='measure' type='quantitative' />
+      <column caption='Hla Drb1 1' datatype='integer' name='[HLA_DRB1_1]' role='measure' type='quantitative' />
+      <column caption='Hla Drb1 2' datatype='integer' name='[HLA_DRB1_2]' role='measure' type='quantitative' />
+      <column caption='Subject Id' datatype='integer' name='[SUBJECT ID]' role='dimension' type='ordinal' />
+      <column caption='Uom10' datatype='string' name='[UOM10]' role='dimension' type='nominal' />
+      <column caption='Uom11' datatype='string' name='[UOM11]' role='dimension' type='nominal' />
+      <column caption='Uom12' datatype='string' name='[UOM12]' role='dimension' type='nominal' />
+      <column caption='Uom13' datatype='string' name='[UOM13]' role='dimension' type='nominal' />
+      <column caption='Uom14' datatype='string' name='[UOM14]' role='dimension' type='nominal' />
+      <column caption='Uom15' datatype='string' name='[UOM15]' role='dimension' type='nominal' />
+      <column caption='Uom18' datatype='string' name='[UOM18]' role='dimension' type='nominal' />
+      <column caption='Uom1' datatype='string' name='[UOM1]' role='dimension' type='nominal' />
+      <column caption='Uom21' datatype='string' name='[UOM21]' role='dimension' type='nominal' />
+      <column caption='Uom22' datatype='string' name='[UOM22]' role='dimension' type='nominal' />
+      <column caption='Uom23' datatype='string' name='[UOM23]' role='dimension' type='nominal' />
+      <column caption='Uom24' datatype='string' name='[UOM24]' role='dimension' type='nominal' />
+      <column caption='Uom25' datatype='string' name='[UOM25]' role='dimension' type='nominal' />
+      <column caption='Uom26' datatype='string' name='[UOM26]' role='dimension' type='nominal' />
+      <column caption='Uom27' datatype='string' name='[UOM27]' role='dimension' type='nominal' />
+      <column caption='Uom2' datatype='string' name='[UOM2]' role='dimension' type='nominal' />
+      <column caption='Uom34' datatype='string' name='[UOM34]' role='dimension' type='nominal' />
+      <column caption='Uom35' datatype='string' name='[UOM35]' role='dimension' type='nominal' />
+      <column caption='Uom36' datatype='string' name='[UOM36]' role='dimension' type='nominal' />
+      <column caption='Uom3' datatype='string' name='[UOM3]' role='dimension' type='nominal' />
+      <column caption='Uom4' datatype='string' name='[UOM4]' role='dimension' type='nominal' />
+      <column caption='Uom5' datatype='string' name='[UOM5]' role='dimension' type='nominal' />
+      <column caption='Uom6' datatype='string' name='[UOM6]' role='dimension' type='nominal' />
+      <column caption='Uom7' datatype='string' name='[UOM7]' role='dimension' type='nominal' />
+      <column caption='Uom8' datatype='string' name='[UOM8]' role='dimension' type='nominal' />
+      <column caption='Uom9' datatype='string' name='[UOM9]' role='dimension' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='Consolidated_Starting_with_Olde' datatype='table' name='[__tableau_internal_object_id__].[Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698]' role='measure' type='quantitative' />
+      <column caption='Notes' datatype='string' name='[notes]' role='dimension' type='nominal' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Switzerland&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Consolidated_Starting_with_Olde' id='Consolidated!Starting!with!Olde_016CBCCD12C74C10A0E4591CA395A698'>
+            <properties context=''>
+              <relation connection='excel-direct.0j4ckyh0eixo5212oubao0drv3gu' name='Consolidated_Starting_with_Olde' table='[Consolidated_Starting_with_Olde$]' type='table'>
+                <columns gridOrigin='A1:DN1076:no:A1:DN1076:0' header='yes' outcome='2'>
+                  <column datatype='integer' name='SUBJECT ID' ordinal='0' />
+                  <column datatype='string' name='Gender' ordinal='1' />
+                  <column datatype='string' name='Race' ordinal='2' />
+                  <column datatype='string' name='Location' ordinal='3' />
+                  <column datatype='string' name='Categorical' ordinal='4' />
+                  <column datatype='string' name='Other (RV, Choroidal granuloma, pars planitis)' ordinal='5' />
+                  <column datatype='string' name='EHR DIAGNOSIS' ordinal='6' />
+                  <column datatype='string' name='Specific Diagnosis' ordinal='7' />
+                  <column datatype='string' name='notes' ordinal='8' />
+                  <column datatype='string' name='AC Abn Od Cells' ordinal='9' />
+                  <column datatype='string' name='AC Abn Os Cells' ordinal='10' />
+                  <column datatype='string' name='Vit Abn Od Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='11' />
+                  <column datatype='string' name='Vit Abn Os Cells  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='12' />
+                  <column datatype='string' name='Vit Abn Od Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='13' />
+                  <column datatype='string' name='Vit Abn Os Haze  (C = &quot;cannot&quot;, ie ungradeable)' ordinal='14' />
+                  <column datatype='real' name='Calcium (Blood)' ordinal='15' />
+                  <column datatype='string' name='UOM' ordinal='16' />
+                  <column datatype='string' name='Range' ordinal='17' />
+                  <column datatype='string' name='Lactate Dehydrogenase (LDH) (Blood)' ordinal='18' />
+                  <column datatype='string' name='UOM1' ordinal='19' />
+                  <column datatype='string' name='Range1' ordinal='20' />
+                  <column datatype='string' name='C-Reactive Protein, Normal and High Sensitivity (Blood)' ordinal='21' />
+                  <column datatype='string' name='UOM2' ordinal='22' />
+                  <column datatype='string' name='Range2' ordinal='23' />
+                  <column datatype='real' name='WBC (Blood)' ordinal='24' />
+                  <column datatype='string' name='UOM3' ordinal='25' />
+                  <column datatype='string' name='Range3' ordinal='26' />
+                  <column datatype='real' name='RBC (Blood)' ordinal='27' />
+                  <column datatype='string' name='UOM4' ordinal='28' />
+                  <column datatype='string' name='Range4' ordinal='29' />
+                  <column datatype='real' name='Hemoglobin (Blood)' ordinal='30' />
+                  <column datatype='string' name='UOM5' ordinal='31' />
+                  <column datatype='string' name='Range5' ordinal='32' />
+                  <column datatype='real' name='Hematocrit (Blood)' ordinal='33' />
+                  <column datatype='string' name='UOM6' ordinal='34' />
+                  <column datatype='string' name='Range6' ordinal='35' />
+                  <column datatype='real' name='MCV (Blood)' ordinal='36' />
+                  <column datatype='string' name='UOM7' ordinal='37' />
+                  <column datatype='string' name='Range7' ordinal='38' />
+                  <column datatype='real' name='MCH (Blood)' ordinal='39' />
+                  <column datatype='string' name='UOM8' ordinal='40' />
+                  <column datatype='string' name='Range8' ordinal='41' />
+                  <column datatype='real' name='MCHC (Blood)' ordinal='42' />
+                  <column datatype='string' name='UOM9' ordinal='43' />
+                  <column datatype='string' name='Range9' ordinal='44' />
+                  <column datatype='real' name='RDW (Blood)' ordinal='45' />
+                  <column datatype='string' name='UOM10' ordinal='46' />
+                  <column datatype='string' name='Range10' ordinal='47' />
+                  <column datatype='integer' name='Platelet Count (Blood)' ordinal='48' />
+                  <column datatype='string' name='UOM11' ordinal='49' />
+                  <column datatype='string' name='Range11' ordinal='50' />
+                  <column datatype='real' name='Neutrophil % (Blood)' ordinal='51' />
+                  <column datatype='string' name='UOM12' ordinal='52' />
+                  <column datatype='string' name='Range12' ordinal='53' />
+                  <column datatype='real' name='Lymphocytes % (Blood)' ordinal='54' />
+                  <column datatype='string' name='UOM13' ordinal='55' />
+                  <column datatype='string' name='Range13' ordinal='56' />
+                  <column datatype='string' name='Angiotensin Conv#Enzyme (Blood)' ordinal='57' />
+                  <column datatype='string' name='UOM14' ordinal='58' />
+                  <column datatype='string' name='Range14' ordinal='59' />
+                  <column datatype='real' name='Beta-2-Microglobulin (Blood)' ordinal='60' />
+                  <column datatype='string' name='UOM15' ordinal='61' />
+                  <column datatype='string' name='Range15' ordinal='62' />
+                  <column datatype='string' name='Lupus Anticoagulant (Blood)' ordinal='63' />
+                  <column datatype='string' name='Lysozyme, Plasma (Blood)' ordinal='64' />
+                  <column datatype='string' name='UOM18' ordinal='65' />
+                  <column datatype='string' name='Range18' ordinal='66' />
+                  <column datatype='string' name='Anti-CCP Ab (Blood)' ordinal='67' />
+                  <column datatype='string' name='UOM21' ordinal='68' />
+                  <column datatype='string' name='Range21' ordinal='69' />
+                  <column datatype='string' name='Anti-Dnase B (Blood)' ordinal='70' />
+                  <column datatype='string' name='UOM22' ordinal='71' />
+                  <column datatype='string' name='Range22' ordinal='72' />
+                  <column datatype='string' name='Anti-ENA Screen (Blood)' ordinal='73' />
+                  <column datatype='string' name='UOM23' ordinal='74' />
+                  <column datatype='string' name='Range23' ordinal='75' />
+                  <column datatype='string' name='Antinuclear Antibody (ANA) (Blood)' ordinal='76' />
+                  <column datatype='string' name='UOM24' ordinal='77' />
+                  <column datatype='string' name='Range24' ordinal='78' />
+                  <column datatype='real' name='Complement C3 (Blood)' ordinal='79' />
+                  <column datatype='string' name='UOM25' ordinal='80' />
+                  <column datatype='string' name='Range25' ordinal='81' />
+                  <column datatype='string' name='Complement C4 (Blood)' ordinal='82' />
+                  <column datatype='string' name='UOM26' ordinal='83' />
+                  <column datatype='string' name='Range26' ordinal='84' />
+                  <column datatype='string' name='DNA Double-Stranded Ab (Blood)' ordinal='85' />
+                  <column datatype='string' name='UOM27' ordinal='86' />
+                  <column datatype='string' name='Range27' ordinal='87' />
+                  <column datatype='string' name='HLA-A* (Blood)' ordinal='88' />
+                  <column datatype='integer' name='HLA_A_1' ordinal='89' />
+                  <column datatype='integer' name='HLA_A_2' ordinal='90' />
+                  <column datatype='string' name='HLA-B* (Blood)' ordinal='91' />
+                  <column datatype='integer' name='HLA_B_1' ordinal='92' />
+                  <column datatype='integer' name='HLA_B_2' ordinal='93' />
+                  <column datatype='string' name='HLA-Cw* (Blood)' ordinal='94' />
+                  <column datatype='integer' name='HLA_C_1' ordinal='95' />
+                  <column datatype='integer' name='HLA_C_2' ordinal='96' />
+                  <column datatype='string' name='HLA-DRB1* (Blood)' ordinal='97' />
+                  <column datatype='integer' name='HLA_DRB1_1' ordinal='98' />
+                  <column datatype='integer' name='HLA_DRB1_2' ordinal='99' />
+                  <column datatype='string' name='HLA-DQB1* / DQ* (Blood)' ordinal='100' />
+                  <column datatype='integer' name='HLA_DQ_1' ordinal='101' />
+                  <column datatype='integer' name='HLA_DQ_2' ordinal='102' />
+                  <column datatype='string' name='HLA-DRB_* (Blood)' ordinal='103' />
+                  <column datatype='integer' name='HLA_DRB*_1' ordinal='104' />
+                  <column datatype='integer' name='HLA_DRB*_2' ordinal='105' />
+                  <column datatype='string' name='Myeloperoxidase Ab (Blood)' ordinal='106' />
+                  <column datatype='string' name='UOM34' ordinal='107' />
+                  <column datatype='string' name='Range34' ordinal='108' />
+                  <column datatype='string' name='Proteinase-3 Antibodies (Blood)' ordinal='109' />
+                  <column datatype='string' name='UOM35' ordinal='110' />
+                  <column datatype='string' name='Range35' ordinal='111' />
+                  <column datatype='string' name='Rheumatoid Factor (Blood)' ordinal='112' />
+                  <column datatype='string' name='UOM36' ordinal='113' />
+                  <column datatype='string' name='Range36' ordinal='114' />
+                  <column datatype='string' name='HBc (HepB core) Ab (Blood)' ordinal='115' />
+                  <column datatype='string' name='HBs (HepB surface) Ag (Blood)' ordinal='116' />
+                  <column datatype='string' name='HCV (HepC) Ab (Blood)' ordinal='117' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='uveitis_data' name='federated.0y507ip14eb0nr1dipzzq0k3sbgg' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0y507ip14eb0nr1dipzzq0k3sbgg'>
+            <column datatype='string' name='[Categorical]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Gender]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Location]' role='dimension' type='nominal' />
+            <column-instance column='[Categorical]' derivation='None' name='[none:Categorical:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Gender]' derivation='None' name='[none:Gender:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Location]' derivation='None' name='[none:Location:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Categorical:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Gender:nk]</rows>
+        <cols>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Location:nk]</cols>
+      </table>
+      <simple-id uuid='{5D46C928-93FF-4F44-9E03-EF8121C9EC1A}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Categorical:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Anti-CCP Ab (Blood):nk]</field>
+            <field>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Categorical:nk]</field>
+            <field>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Gender:nk]</field>
+            <field>[federated.0y507ip14eb0nr1dipzzq0k3sbgg].[none:Location:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{E7BFC284-423F-4FB8-A1D1-4059F0BA47EA}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAALOUlEQVR4nO3dTXAb533H8e/ibRcAwXeKEiUrtqjXWLbektiJmzhOPInrepJJm0Pj6aXT
+      U++99dBDZ3psL53MZHLw5FBPJ02cF79Uia3YjuJYFvVqSZREURRlkeYr+IZ3LLDbg2SJkklZ
+      5JCUq//vM+MDdheLBYmvuAvAz+OEYRgiYlTkfh+AyP2kAMQ0BSCmKQAxTQGIaQpATFMAYpoC
+      ENMUgJimAMQ0BSCmKQAxTQGIaQpATFMAYpoCENMUgJimAMQ0BSCmKQAxTQGIaQpATFMAYpoC
+      ENMUgAW1MpMjV7k6niOYNw5aZXaEsZz/2fcvTfPRZP6TnTE78jFz93C3/w8UgAWFcXoOv8bP
+      f/0B07Xg5uLJ06/z5oXcZ99/5Bgv/3Hgxo0iZ9/4Lb1zq3Ooa00BGOF2bmdv4zCHL87e70P5
+      XFEAVkQ8tnz9CaLH/syVYv1Tq2dOvcJ/HRm5ebvad5CfHLqylkd4XygAQyLuI+zZ7XPm+CDl
+      4PZ1gV+iVJ23sFahUPl0KA8aBWBMx5a9pGf7uDpVvt+H8rmgAIzxmtazqS3G0OWPPvVXwCIF
+      YIwTTbJ1xyPkxwcZnS7dXB6NRqn5PvUgpFbJMzmTv8teHhyx+30AsvairZv5Ukc/rx6ZomHT
+      9WXprq24Z47y5qF+omGN4vAodN7f41wLjmaIMcAvMDZTJN3YSoMbBSAsTXKhf5hk1y4ebktA
+      WGGkv4+PZ6vE0610NTtkwzZ2dGUgP8r5GY9dm5oBn8mBq7BxK+3u/X1aK0EBiGm6BhDTFr0G
+      GB8fp1qtruWxiKy5RU+BisUi9fqD/0GI2KZrADFN1wBimgIQ0/RB2D346avHOd43suj6f/2H
+      Z+hoTgPw4z/9B/0TfYtu+28v/DtePAlAru9fqJeGFt7QidH8+E9u3X7tLSgv8v0dz4MXnr37
+      k5AFKYB7MJUrM5Jd/KsB9eDWZdRUIctobvFY5v8fWUFlnKDy8cIbOnf8anJ5KC0SgF9b9PHk
+      7nQKJKYpADFNAYhpCkBMUwBimt4FugeJWBQvsfiPyrltWxcv5i2+7fyNIy5EFt7WufNdoFjs
+      +n8LievXuFz6KoSYplMgMU0BiGkKQExTAGKaAhDTFICYpgDENAUgpikAMU0BiGkKQExTAGKa
+      AhDTFICYpgDENAUgpikAMU0BiGkKQExTAGKaAhDTljaeRjXHlUsXuDpRuLnI7XiEvdsfIhlf
+      zZZyDJwYp31/N42r+Chiz9JetaVpTvdeYKoEnufheR5uPHbbuDirI8up358ku+qPI9YsfUSl
+      VDu79hxgV1dm3sKQMKjj+1X8Wh0iMVzXJRZxCMM61UoNnIBarY4TiZNIRKlXq9TqIZG4i5uI
+      EXEgqPlUqlXqQYgTieJ6HrHIAnmFAZVymVoQ4kRiuG6C6ELbiXyGFRlSLAxDZod7OXLkBIPj
+      OUi1sGv/03xl9ybiQR+/+M9jpLfA6MgMtTDD9n3dFD+6xHA2j9f+Rf7y+8/SlYSxc+/w+6OX
+      yJUDcJPsfvJ7PPV4B/HbHq3GzOBZ3nn/OB9Pl4i67XzxG9/iqe3rdEEjS7b0AOaGeP8PB+nL
+      JABoeWQvB7at40rvZTqe/D7PbmykPHaRw0dPcmVDB9tbQsKIx7avfoe/6mxg+J2X+OXVkBdf
+      eJF1aTj26ksMTV8PwG3bwvM/+gZt6Tj+7Hl+8/PjZB97jvXz/3EvjdBzJstj332R77XEKYx8
+      yOuHTjDe/Rzroyv0UxEzlh6Am2FjxxYears+zU+ytYlIOMqZ948x0jvIYQfCus+ckyGzswAt
+      Dg3tm9m8oYk4kG5qpjnyBTY0eoRBQKbBI3djcMakW+XNX/2MwakiQehTraxjTxHWp289fHVi
+      iPP9Jzl7+UMcxwF8chMxdhSeY72ukGWJlhFAE5u7t992DVAtjZNu288P//55Nn6yRydCLB6H
+      +ti97df/iIOvnGDjd/+ab3c2EHWmeOul/+XOqYprvo+75Wv86Dv7SNw8748Qd5f8TERW5rQ5
+      Gu2krW2UywMzEHdJREPyc9MUy0uYaLs0zXRqMzs3tpKMBeRGh8kuMFF9qmMDmckBLmUrxBI3
+      HmtskqKugWUZVuQiOBJrYOe+xzl8/CD/fSpCNJagddMODuxtJRX/7PsDkNrErvRB/uflQTwv
+      SVt7mmChcaszm/nmV4Z4+9BvOBdxiMRcWtbt5C++0LUST0WMWdrw6PUqc8UKrpfCjc+/4gwJ
+      6j6FuVnyJZ8wEiXV0EQm7RKhSm6mTrolRRSolWbJBUla0gnCMKRSmCFwW0jFQ6qFGaZmS4SR
+      OKnGBiLlMvGmFrxolbmJEl5HEwkgDHzmpqYoVK+/5ZrKNNOUTqzB5xHyoNH8AGKa3joX0xSA
+      mKYAxDQFIKYpADFNAYhpCkBMUwBimgIQ0xSAmKYAxDQFIKYpADFNAYhpCkBMUwBimgIQ0xSA
+      mKYAxDQFIKYpADFNAYhpCkBMUwBimgIQ0xSAmKYAxDQFIKYpADFNAYhpCkBMUwBimgIQ0xSA
+      mKYAxDQFIKYpADFtReYJftC9fPxnnB05vej6f3rmn2lNt12/8V4PTE4tvrPnvw1x/dg/L/Sb
+      uAcT+TEGpwYWXe8H/q0bsznITi++M81K+7miUyAxTQGIaQpATFMAYpoCENMUgJjmhKHelxO7
+      9BdATFMAYpoCENMUgJimAMQ0BSCmKQAxTQGIaQpATFMAYpoCENMUgJimAMQ0BSCmKQAxTQGI
+      aQpATFMAYpoCENMUgJimAMS0pQVQLXCt7zRHLwxTC+YNJhGGFGeGOfPBMfrH5gjuNs5EUGN6
+      bJiRyTzB8o5ZZMUsLYBSlnPne3j7jR4m/PrNxWFYY3Sgh0O/e5fTA+PU7xpAlaG+Dzk3MEn9
+      LpuJrIUlnwIlWrvZ1znK6Ws+n7zOg7rP5MgkG7Z1k4wBhIRhSFCvU6vVqNVq1INgwZHBwzAk
+      CG5tFwQhGqhI1soy5geIsfXLj/PHk72Uuw+QdKCWv8S1uW10d+WZACCkOHGZ995+h97hOQLH
+      o+vRJ/jWU3vocOftKgyp5sf48P3DHL9wjUKYpnvPV3n6yUdp8aIr8wxF7mJ5E2S0bmeb/zsu
+      z+1nd5PDzKXzODufoWnu2I0AgEQTj379Bzzd2Uq0Ms7hd08yPDJL+8OpeTsKyV45zUzmAH/3
+      j39Dwp/k6Lt/ovdSJ0881qnZO2TVLfM1luGh7UnO9I2x68suFy9E2PXDZuj5ZH0ELxFj+uyf
+      eev1YYq1KrPZCPs3PUbArQDCEK6d/YCjo5fpP+UAAYVZn83uTqooAFl9y36NNW/aQfzoRcYH
+      Xa527uapFNycRKhepO/UEfrz63j2B1+jIV7m3B+OUQ7qd5zfhwTxFE8+97cc2BjFAcAh7iXx
+      lntgIkuw7M8BUplOMg1ZPnhviIe3dXLbGXvNp1QLaN+ylfVtTcTqZXK54qff9XEcWjvXM35t
+      CMdtoDGTJhrUqFT8O7cUWRXL/gsQS6Zpy0Tp6Q3Z15K6Y6VLW2OKiz1vMHzaI93gMp2v0nnH
+      PhwcNu44wMC7J3jtlV7isRiJhg527tlDY+Md+xRZBUsbHr1WYbZYwU024MUdKoUZpgoh7W3N
+      xKNQnpulFEnSlHYJq0Wyk5MUqiFephHPcYh6KTKpGKXcHH4kRabBxQnqlHJTZKfz+KGD19BM
+      W0sjiVjkximRyOrR/ABimr4LJKYpADFNAYhpCkBMUwBimgIQ0xSAmKYAxDQFIKYpADFNAYhp
+      CkBMUwBimgIQ0xSAmKYAxDQFIKYpADFNAYhpCkBMUwBimgIQ0xSAmKYAxDQFIKYpADFNAYhp
+      CkBMUwBimgIQ0xSAmPZ/GkKYK99W7P4AAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>
