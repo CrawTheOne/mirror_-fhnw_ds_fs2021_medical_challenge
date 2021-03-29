@@ -8,7 +8,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
-def read_data(rel_path, **kwargs):
+def read_data(rel_path, verbose=False, **kwargs):
     """
     Generalized function that reads a xlsx, csv, json or html data structure into a pandas dataframe
 
@@ -16,26 +16,33 @@ def read_data(rel_path, **kwargs):
     :argument kwargs:  parameters for pd.read_"extension" functions
     """
     filename, file_extension = os.path.splitext(rel_path)
-    print(os.path.basename(rel_path) + " will be read")
+    if verbose:
+        print(os.path.basename(rel_path) + " will be read")
     if file_extension == ".xlsx": #when reading excel a usefull kwargs will be na_values = "dict of values to consider na"
         df = pd.read_excel(rel_path, **kwargs)
-        print("reading filetype "+file_extension)
+        if verbose:
+            print("reading filetype "+file_extension)
     elif file_extension == ".csv":
         df = pd.read_csv(rel_path, **kwargs)
-        print("reading filetype "+file_extension)
+        if verbose:
+            print("reading filetype "+file_extension)
     elif file_extension == ".json":
         df = pd.read_json(rel_path, **kwargs)
-        print("reading filetype "+file_extension)
+        if verbose:
+            print("reading filetype "+file_extension)
     elif file_extension == ".html":
         df = pd.read_html(rel_path, **kwargs)
-        print("reading filetype "+file_extension)
+        if verbose:
+            print("reading filetype "+file_extension)
     else:
-        print("Filetype not supported by function")
+        if verbose:
+            print("Filetype not supported by function")
         df = 0
 
     if df.size != 0:
-        print("\nSuccessfully created table with ", df.size, "values and loaded as df")
-        print("The table is",df.shape[1], "wide and",df.shape[0],"long \n")
+        if verbose:
+            print("\nSuccessfully created table with ", df.size, "values and loaded as df")
+            print("The table is",df.shape[1], "wide and",df.shape[0],"long \n")
 
     return df
 
@@ -237,7 +244,7 @@ def preprocessing_loc(df, approach='multi', verbose= False):
         print(df['loc'].value_counts())
     return df
 
-def num_to_binary(df, column, cutoff):
+def num_to_binary(df, column, cutoff = None, verbose=False):
     """
     Creates a binary feature (0 and 1 values) out of a numerical feature
     
@@ -251,11 +258,24 @@ def num_to_binary(df, column, cutoff):
     -------
     df:       pd.dataframe, DataFrame where 'column' is replaced with a binarized version of said 'column'
     """ 
-    # extract numerical values (strings with no digits = np.nan)
-    if(df[column].dtype != np.float64 or df[column].dtype != np.int64):
+    if column == 'rheumatoid_factor':
         df = extract_num(df, column, errors='coerce', verbose=False)
-    df[column]= np.where(df[column].isna(), np.nan, np.where(df[column] <=20, 0, 1))
-    return df
+        df = extract_num(df, df.iloc[:, df.columns.get_indexer([column])+2].columns[0], errors='coerce', verbose=False) # select range column and extract_num
+        df[column] = np.where(df[column] <= df.iloc[:, df.columns.get_indexer([column])+2].iloc[:, 0] , 0, 1)
+        df[column].where(df.iloc[:, df.columns.get_indexer([column])+2].iloc[:,0].notna(),np.nan,inplace=True) # keeps NaN's
+        df[column] = df[column].astype('category')
+        
+        if verbose:
+            print(df[column].dtype)
+            print(df[column].value_counts(dropna=False))
+        
+        return df
+    # extract numerical values (strings with no digits = np.nan)
+    elif(df[column].dtype != np.float64 or df[column].dtype != np.int64):
+        df = extract_num(df, column, errors='coerce', verbose=False)
+        df[column]= np.where(df[column].isna(), np.nan, np.where(df[column] <=cutoff, 0, 1))
+    
+        return df
 
 
 #function to return list of columns to convert to which data type (with choice) according to given list
@@ -343,6 +363,8 @@ def neg_col_to_cat(df, columns, verbose=False):
             df[col] = df[col].astype('category')
             if verbose:
                 print(df[col].value_counts(dropna=False))
+        elif col == 'rheumatoid_factor':
+            df = num_to_binary(df, 'rheumatoid_factor', verbose=verbose)
         else:
             df[col].replace(r'(see)', np.nan)
             df[col] = np.where(df[col].isna(), np.nan, np.where(df[col] =='NEG', 0, 1))
@@ -391,29 +413,81 @@ def merge_corrected(original_df, corrected_df):
 
     return original_df
 
-def preprocessing_numeric(df):
+def range_var_to_cat(df, columns, verbose =False):
+    """
+    Transform features with associated range column to a categorical variable with the following categories:
+     - 0 = 'below range'
+     - 1 = 'in range'
+     - 2 = 'above range'
+    -----
+    :param df: a pandas DataFrame
+    :param columns: list of strings, containing column names in df
+    :param verbose: bool, default False, prints value_count of columns
     
+    :return: input DataFrame with transformed columns
+    """
+    for col in columns:
+        if verbose:
+            print(f'Current column: {col}')
+        t = df.loc[:,col:].iloc[:,:3] # select range and uom of feature
+        ran_col =  [i for i in t.columns if 'range' in i]
+
+        expand_range = t[ran_col[0]].str.split('-', expand = True).rename(columns={0:'lower',1:'upper'}) # create column with upper and lower limit of range
+
+        
+        t['lower'], t['upper'] = expand_range.lower.astype('float'), expand_range.upper.astype('float')
+        t[col] = t[col].astype('float') # makes sure all numeric columns are of same type (important for np.where)
+        df[col] = np.where(t[col] <= t.lower, 0, np.where(t[col] >= t.upper, 2, 1))
+        df[col].where(t[col].notna(),np.nan,inplace=True) # keeps NaN's
+        df[col] = df[col].astype('category')
+        
+        if verbose:
+            print(df[col].value_counts(dropna=False))
+            
+    return df
+
+# TODO: Add description
+def preprocessing_numeric(df, num_to_cat = False, verbose=False):
+    """
+    TODO: Describe function
+    """
     list_path = "../data/col_names&data_type-Copy1.xlsx"
     col_index_name = "new col name"
     col_data_type_name = "data_type"
     data_type = "numerical"
 
     desired_dtype = ["int64", "float64"]
-
+    
     #return list of all columns with specific dtype
     num_columns = list_of_totype(list_path, col_index_name, col_data_type_name, data_type)
-    # print(num_columns)
 
+    # filter already dropped columns
+    num_columns = list(set(num_columns) & set(df.columns.tolist()))
+    # filter out columns with dtype category
+    num_columns = [i for i in num_columns if df[i].dtype.name != 'category']
     #create dataframe with columns that contain a mix of strings and numerical values
     problem_df = coerce_then_problems(df, list_path, col_index_name, col_data_type_name, data_type, desired_dtype, verbose=False)
     problem_columns = list(problem_df)
-    # print(problem_columns)
 
     corrected_df = iter_columns_extract_num(problem_df)
 
     #foo = pipe.coerce_then_problems(df, list_path, col_index_name, col_data_type_name, data_type, desired_dtype)
 
     df = merge_corrected(df, corrected_df)
+    
+    if num_to_cat:
+        # get list of columns with uom and range
+        ranges_list = []
+        list_cols = num_columns
+    
+        for _, i in enumerate(list_cols):
+            if 'uom' in df.iloc[:, df.columns.get_indexer([i])+1].columns[0] \
+            and 'range' in df.iloc[:, df.columns.get_indexer([i])+2].columns[0] \
+            and 'range' in df.iloc[:, df.columns.get_indexer([i])-1].columns[0]:
+                ranges_list.append(i)
+            if _ >= len(list_cols)-2:
+                break
+        df = range_var_to_cat(df, ranges_list, verbose =verbose)
     
     return df
 
@@ -433,4 +507,44 @@ def preprocessing_specific(df):
     diag_less_10 = count[count['count'] <= 10].diagnosis.tolist()
     df.specific_diagnosis = df.specific_diagnosis.replace({x:'other' for x in diag_less_10})
     df.specific_diagnosis = df.specific_diagnosis.astype('category')
+    return df
+
+def uom_fix(df, verbose=False):
+    """
+    Fixes 'mulitple uoms' per feature problem   
+    Part of the code is from Riccard Nef: https://gitlab.fhnw.ch/riccard.nef/medicalchallenge/-/blob/master/NordStream.html
+
+    -----
+    :param df: a pandas DataFrame
+    :param verbose: bool, default False, prints value_count of columns
+    
+    :return: input DataFrame with transformed columns
+    """
+    # replacing mg/dL with mg/L and changing value accordingly
+    condition = df['uom2'[:]] == df['uom2'].value_counts().idxmax()
+    df['c-reactive_protein,_normal_and_high_sensitivity'] = pd.to_numeric(df['c-reactive_protein,_normal_and_high_sensitivity'],errors='coerce')
+    df['c-reactive_protein,_normal_and_high_sensitivity'].where(cond = condition, other = df['c-reactive_protein,_normal_and_high_sensitivity']*10.0, inplace = True)
+    df['uom2'].where(cond = condition, other = df['uom2'].value_counts().idxmax(), inplace = True)
+    if verbose:
+        print("units left in uom2: ",df['uom2'].unique())
+
+    #uom27
+    condition = df['uom27'[:]] == df['uom27'].value_counts().idxmax()
+    df['dna_double-stranded_ab'] = pd.to_numeric(df['dna_double-stranded_ab'],errors='ignore')
+    try:
+        other = df['dna_double-stranded_ab']*1000.0
+    except TypeError:
+        other = df['dna_double-stranded_ab']
+        if verbose:
+            print('Some values are not float')
+    df['dna_double-stranded_ab'].where(cond = condition, other = other, inplace = True)
+    df['uom27'].where(cond = condition, other = df['uom27'].value_counts().idxmax(), inplace = True)
+
+    if verbose:
+        print("units left in uom27: ",df['uom27'].unique())
+
+    # change ranges
+    df['range2'] = df['range2'].replace('<0.80', '0.00-8.00')
+    df['range2'] = df['range2'].replace('0.020-0.800', '0.20-8.00')
+    
     return df
