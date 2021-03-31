@@ -451,7 +451,7 @@ def preprocessing_numeric(df, num_to_cat = False, verbose=False):
     """
     TODO: Describe function
     """
-    list_path = "../data/col_names&data_type-Copy1.xlsx"
+    list_path = "../data/col_names_and_data_type.xlsx"
     col_index_name = "new col name"
     col_data_type_name = "data_type"
     data_type = "numerical"
@@ -547,4 +547,106 @@ def uom_fix(df, verbose=False):
     df['range2'] = df['range2'].replace('<0.80', '0.00-8.00')
     df['range2'] = df['range2'].replace('0.020-0.800', '0.20-8.00')
     
+    return df
+
+def preprocessing_hepatitis(df, col=['hbc__ab', 'hbs__ag', 'hcv__ab'], verbose=False):
+    for c in col:
+        df[c] = df[c].str.lower()
+        df.loc[df[c] == 'negative', c] = 0
+        df.loc[df[c] == 'see note | positive result s/co ratio is >5.0.  confirmatory testing i', c] = 1
+        df.loc[df[c] == 'see below | positive result s/co ratio is >5.0.  confirmatory testing', c] = 1
+        df.loc[df[c] == 'reactive', c] = 1
+        df.loc[df[c] == 'repeat reactive', c] = 1
+        df.loc[df[c] == 'invalid result', c] = np.nan
+        df.loc[df[c] == 'note:', c] = np.nan
+        df[c] = df[c].astype('category')
+        if verbose:
+            print(df[c].value_counts())
+    return df
+
+def preprocessing_inflammation(df, col = ['ac_abn_od_cells', 'ac_abn_os_cells', 'vit_abn_od_cells',
+       'vit_abn_os_cells', 'vit_abn_od_haze', 'vit_abn_os_haze']):
+    for c in col: 
+        # replace 'C' (for missing) with NaN
+        df[c] = df[c].replace('C',np.nan)
+        df[c] = df[c].astype('float')
+        df[c] = pd.Categorical(values=df[c], categories=df[c].unique().sort(), ordered=True)
+    return df
+
+def preprocessing_race(df):
+    df.race = df.race.replace({'Race or Ethnic Group Data Not Provided by Source':'unknown', 
+                               'Unknown Race':'unknown'})
+    df.race = df.race.fillna(value='unknown')
+    df.race = df.race.astype('category')
+    assert df.race.isna().sum() == 0, 'Not all missing values are treated'
+    return df
+
+def gender_dtype(df):
+    df.gender = df.gender.astype('category')
+    return df
+    
+def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx", 
+                       rename_path="../data/col_names_and_data_type.xlsx",
+                       num_to_cat = False, 
+                       nan_percentage=.5, 
+                       drop_columns=['ehr_diagnosis', 'id'], 
+                       verbose = False,
+                       drop_filter = ['hla'], 
+                       loc_approach = 'multi', 
+                       save_as_csv = False,
+                       neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor']):
+    """
+    Preprocessing_pipe combines the preprocessing functions of the pipe.py script. It returns a cleaned dataset (note that missing values can still exist)
+    that is ready to be piped into a ml-pipeline (see impute_and_encode-function in pipe.py)
+    
+    Arguments
+    ---------
+    :param rel_path:       str, relative path to the input data (default: path to uveitis_data.xlsx) \n
+    :param rename_path:    str, relative path an excel file containing cleaned up column names (default: path to col_names_and_data_type.xlsx) \n
+    :param num_to_cat:     bool, default False, if True numeric features (with uoms and ranges) get encoded into a categorical feature 
+                               with categories 0 = 'below range', 1 = 'in range', 2 = 'above range'. 
+                               If false, numeric features will only get cleaned up (brought into uniform data type) \n
+    :param nan_percentage: float, in range 0 to 1, default 0.5 (aka 50%). Features with more than nan_percentage missing values will get droppep \n
+    :param drop_columns:   list, a list containing column names to be dropped.  \n
+    :param drop_filter:    list, a list containing strings. If the name of a feature contains one of the strings it will be dropped. \n
+    :param loc_approach:   if 'multi' (default): consolidates location feature into multiple locations ('anterior','posterior','pan...',etc.) 
+                               elif 'binary': collapses location feature into categories 'posterior_segment', 'anterior_segment' \n
+    :param neg_col_as_cat: list, a list of column names of features to transform into binary variables. 0 = 'Negative', 1 = 'Positive' \n
+    :param verbose:        bool, default False, prints information if True \n
+    :param save_as_csv:    bool, default True, if true saves the transformed dataframe named 'cleaned_uveitis_data' to data folder 
+                                (Attention! If true, it is possible that already existing files get overwritten)
+    
+    Return
+    ------
+    :return:               input DataFrame with transformed columns
+    """
+    # load dataset
+    df = read_data(rel_path=rel_path)
+    
+    df = (df.pipe(rename, path=rename_path) # rename columns
+        .pipe(pd.DataFrame.applymap, lambda x: x.strip() if isinstance(x, str) else x) # strip leading or trailing whitespace
+
+        # dropping columns
+        .pipe(drop_nan_columns, nan_percentage=nan_percentage, verbose = verbose) # drop columns with above nan_percantage missing values
+        .pipe(pd.DataFrame.drop, columns=drop_columns)
+         )
+          
+    for i in drop_filter:
+          df = drop_via_filter(df, filter_str=i, verbose=verbose)
+        
+    df = (df.pipe(gender_dtype)                              # change dtype from 'gender' to catgory
+        .pipe(preprocessing_race)                            # collapse 'race' feature
+        .pipe(preprocessing_loc, approach=loc_approach, verbose=verbose) # use approach ='binary' for binary classification
+        .pipe(preprocessing_cat)                             # collapes 'cat' feature
+        .pipe(preprocessing_specific)                        # collapse 'specific_diagnosis'
+        .pipe(preprocessing_inflammation)                    # transform columns that contain information about severeness of inlamation
+        .pipe(preprocessing_hepatitis)                       # clean and binarize hepatitis-columns
+        .pipe(neg_col_to_cat, columns=neg_col_as_cat)        # transform columns into binary (negative, postive) features
+        .pipe(preprocessing_numeric, num_to_cat=num_to_cat)  # clean up numeric and if num_to_cat true transform into categorical features
+        .pipe(drop_uom_and_range, verbose=False)             # drop 'uom' amd 'range' columns after use
+        ) 
+    
+    if save_as_csv:
+        df.to_csv('../data/cleaned_uveitis_data.csv')
+        
     return df
