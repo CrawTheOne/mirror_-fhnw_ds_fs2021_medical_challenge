@@ -347,7 +347,7 @@ def coerce_then_problems(dframe, list_path, col_index_name, col_data_type_name, 
     matches = problem_columns(matches, desired_dtype)
     return matches
 
-def neg_col_to_cat(df, columns, verbose=False):
+def preprocessing_neg_col_to_cat(df, columns, verbose=False):
     """
     Transform columns with majority of 'NEG' values into binary, categorical columns
     -----
@@ -360,7 +360,7 @@ def neg_col_to_cat(df, columns, verbose=False):
     for col in columns:
         if col == 'anti-ccp_ab':
             df = num_to_binary(df, 'anti-ccp_ab', 20)
-            df[col] = df[col].astype('category')
+            df[col] = df[col].astype('bool')
             if verbose:
                 print(df[col].value_counts(dropna=False))
         elif col == 'rheumatoid_factor':
@@ -368,7 +368,7 @@ def neg_col_to_cat(df, columns, verbose=False):
         else:
             df[col].replace(r'(see)', np.nan)
             df[col] = np.where(df[col].isna(), np.nan, np.where(df[col] =='NEG', 0, 1))
-            df[col] = df[col].astype('str').astype('category')
+            df[col] = df[col].astype('str').astype('bool')
             if verbose:
                 print(df[col].value_counts(dropna=False))
 
@@ -559,7 +559,7 @@ def preprocessing_hepatitis(df, col=['hbc__ab', 'hbs__ag', 'hcv__ab'], verbose=F
         df.loc[df[c] == 'repeat reactive', c] = 1
         df.loc[df[c] == 'invalid result', c] = np.nan
         df.loc[df[c] == 'note:', c] = np.nan
-        df[c] = df[c].astype('category')
+        df[c] = df[c].astype('bool')
         if verbose:
             print(df[c].value_counts())
     return df
@@ -581,7 +581,7 @@ def preprocessing_race(df):
     assert df.race.isna().sum() == 0, 'Not all missing values are treated'
     return df
 
-def gender_dtype(df):
+def preprocessing_gender_dtype(df):
     df.gender = df.gender.astype('category')
     return df
     
@@ -634,16 +634,16 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
     for i in drop_filter:
           df = drop_via_filter(df, filter_str=i, verbose=verbose)
         
-    df = (df.pipe(gender_dtype)                              # change dtype from 'gender' to catgory
-        .pipe(preprocessing_race)                            # collapse 'race' feature
-        .pipe(preprocessing_loc, approach=loc_approach, verbose=verbose) # use approach ='binary' for binary classification
-        .pipe(preprocessing_cat)                             # collapes 'cat' feature
-        .pipe(preprocessing_specific)                        # collapse 'specific_diagnosis'
-        .pipe(preprocessing_inflammation)                    # transform columns that contain information about severeness of inlamation
-        .pipe(preprocessing_hepatitis)                       # clean and binarize hepatitis-columns
-        .pipe(neg_col_to_cat, columns=neg_col_as_cat)        # transform columns into binary (negative, postive) features
-        .pipe(preprocessing_numeric, num_to_cat=num_to_cat)  # clean up numeric and if num_to_cat true transform into categorical features
-        .pipe(drop_uom_and_range, verbose=False)             # drop 'uom' amd 'range' columns after use
+    df = (df.pipe(preprocessing_gender_dtype)                              # change dtype from 'gender' to catgory
+        .pipe(preprocessing_race)                                          # collapse 'race' feature
+        .pipe(preprocessing_loc, approach=loc_approach, verbose=verbose)   # use approach ='binary' for binary classification
+        .pipe(preprocessing_cat)                                           # collapes 'cat' feature
+        .pipe(preprocessing_specific)                                      # collapse 'specific_diagnosis'
+        .pipe(preprocessing_inflammation)                                  # transform columns that contain information about severeness of inlamation
+        .pipe(preprocessing_hepatitis)                                     # clean and binarize hepatitis-columns
+        .pipe(preprocessing_neg_col_to_cat, columns=neg_col_as_cat)        # transform columns into binary (negative, postive) features
+        .pipe(preprocessing_numeric, num_to_cat=num_to_cat)                # clean up numeric and if num_to_cat true transform into categorical features
+        .pipe(drop_uom_and_range, verbose=False)                           # drop 'uom' amd 'range' columns after use
         ) 
     
     if save_as_csv:
