@@ -431,10 +431,12 @@ def range_var_to_cat(df, columns, verbose =False):
             print(f'Current column: {col}')
         t = df.loc[:,col:].iloc[:,:3] # select range and uom of feature
         ran_col =  [i for i in t.columns if 'range' in i]
-
         expand_range = t[ran_col[0]].str.split('-', expand = True).rename(columns={0:'lower',1:'upper'}) # create column with upper and lower limit of range
 
-        
+        # handle special range2 case of '<0.80' entries
+        expand_range.loc[expand_range.lower == '<0.80', 'upper'] = 0.8
+        expand_range.replace('<0.80', 0.0, inplace=True)
+
         t['lower'], t['upper'] = expand_range.lower.astype('float'), expand_range.upper.astype('float')
         t[col] = t[col].astype('float') # makes sure all numeric columns are of same type (important for np.where)
         df[col] = np.where(t[col] <= t.lower, 0, np.where(t[col] >= t.upper, 2, 1))
@@ -497,6 +499,7 @@ def preprocessing_cat(df):
         df.cat = df.cat.fillna(value='not_uveitis')
     df.loc[df['cat'].str.contains('masquerade', case=False), 'cat'] = 'not_uveitis'
     df.drop(df[df.cat == 'scleritis'].index, inplace = True)
+    
     return df
 
 def preprocessing_specific(df):
@@ -584,6 +587,12 @@ def preprocessing_race(df):
 def preprocessing_gender_dtype(df):
     df.gender = df.gender.astype('category')
     return df
+
+def define_uveitis(x):
+    if x == 'not_uveitis':
+        return False
+    else:
+        return True
     
 def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx", 
                        rename_path="../data/col_names_and_data_type.xlsx",
@@ -594,6 +603,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
                        drop_filter = ['hla'], 
                        loc_approach = 'multi', 
                        save_as_csv = False,
+                       binary_cat = False,
                        neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor']):
     """
     Preprocessing_pipe combines the preprocessing functions of the pipe.py script. It returns a cleaned dataset (note that missing values can still exist)
@@ -601,18 +611,18 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
     
     Arguments
     ---------
-    :param rel_path:       str, relative path to the input data (default: path to uveitis_data.xlsx) \n
-    :param rename_path:    str, relative path an excel file containing cleaned up column names (default: path to col_names_and_data_type.xlsx) \n
+    :param rel_path:       str, relative path to the input data (default: path to uveitis_data.xlsx)
+    :param rename_path:    str, relative path an excel file containing cleaned up column names (default: path to col_names_and_data_type.xlsx) 
     :param num_to_cat:     bool, default False, if True numeric features (with uoms and ranges) get encoded into a categorical feature 
                                with categories 0 = 'below range', 1 = 'in range', 2 = 'above range'. 
-                               If false, numeric features will only get cleaned up (brought into uniform data type) \n
-    :param nan_percentage: float, in range 0 to 1, default 0.5 (aka 50%). Features with more than nan_percentage missing values will get droppep \n
-    :param drop_columns:   list, a list containing column names to be dropped.  \n
-    :param drop_filter:    list, a list containing strings. If the name of a feature contains one of the strings it will be dropped. \n
+                               If false, numeric features will only get cleaned up (brought into uniform data type) 
+    :param nan_percentage: float, in range 0 to 1, default 0.5 (aka 50%). Features with more than nan_percentage missing values will get droppep
+    :param drop_columns:   list, a list containing column names to be dropped.
+    :param drop_filter:    list, a list containing strings. If the name of a feature contains one of the strings it will be dropped.
     :param loc_approach:   if 'multi' (default): consolidates location feature into multiple locations ('anterior','posterior','pan...',etc.) 
-                               elif 'binary': collapses location feature into categories 'posterior_segment', 'anterior_segment' \n
-    :param neg_col_as_cat: list, a list of column names of features to transform into binary variables. 0 = 'Negative', 1 = 'Positive' \n
-    :param verbose:        bool, default False, prints information if True \n
+                               elif 'binary': collapses location feature into categories 'posterior_segment', 'anterior_segment' 
+    :param binary_cat:     bool, default False, if True adds uveitis feature where True =  'uveitis' and False = 'not_uveitis'
+    :param neg_col_as_cat: list, a list of column names of features to transform into binary variables. 0 = 'Negative', 1 = 'Positive'
     :param save_as_csv:    bool, default True, if true saves the transformed dataframe named 'cleaned_uveitis_data' to data folder 
                                 (Attention! If true, it is possible that already existing files get overwritten)
     
@@ -631,8 +641,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
         .pipe(pd.DataFrame.drop, columns=drop_columns)
          )
           
-    for i in drop_filter:
-          df = drop_via_filter(df, filter_str=i, verbose=verbose)
+    
         
     df = (df.pipe(preprocessing_gender_dtype)                              # change dtype from 'gender' to catgory
         .pipe(preprocessing_race)                                          # collapse 'race' feature
@@ -646,7 +655,16 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
         .pipe(drop_uom_and_range, verbose=False)                           # drop 'uom' amd 'range' columns after use
         ) 
     
+    if binary_cat:
+        df['uveitis'] = df['cat'].apply(define_uveitis)
+        df['uveitis'] = df['uveitis'].astype('bool')
+    
+    for i in drop_filter:
+        df = drop_via_filter(df, filter_str=i, verbose=verbose)
+         
+    
     if save_as_csv:
         df.to_csv('../data/cleaned_uveitis_data.csv')
         
     return df
+
