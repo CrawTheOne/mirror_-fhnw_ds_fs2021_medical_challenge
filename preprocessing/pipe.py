@@ -611,6 +611,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
                        loc_approach = 'multi', 
                        save_as_csv = False,
                        binary_cat = False,
+                       hotencode_gender = False,
                        neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor']):
     """
     Preprocessing_pipe combines the preprocessing functions of the pipe.py script. It returns a cleaned dataset (note that missing values can still exist)
@@ -668,10 +669,12 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
     
     for i in drop_filter:
         df = drop_via_filter(df, filter_str=i, verbose=verbose)
-         
-    
+
+    if hotencode_gender:
+        df['gender'] = df['gender'].cat.codes
+
     if save_as_csv:
         df.to_csv('../data/cleaned_uveitis_data.csv')
-        
+
     return df
 
