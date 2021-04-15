@@ -73,7 +73,7 @@ def rename(df, path):
     return df
 
 
-def impute_and_encode(cat_features, num_features, imputer):
+def impute_and_encode(cat_features, num_features, imputer, one_hot=True):
     '''
     Creates preprocesser object that scales numeric features and onehotencodes categorical features
     
@@ -82,10 +82,11 @@ def impute_and_encode(cat_features, num_features, imputer):
     cat_features: list, list of categorical features
     num_features: list, list of numerical features
     imputer: dict, defines imputation method of SimpleImputer in Form {'categorical':{'strategy':'METHOD', 'fill_value'='METHOD'}, 'numerical':{'strategy':'METHOD'}}
+    one_hot: bool, default True, if false prohibits one_hot_encoding
     
     Returns
     -------
-    df: df with encoded numeric and categorical features
+    preprocessor: returns preprocesser object
     '''
     if num_features is not None:
         numeric_transformer = Pipeline(steps=[
@@ -93,18 +94,24 @@ def impute_and_encode(cat_features, num_features, imputer):
             ('scaler', StandardScaler())])
 
     if cat_features is not None:
-        categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value'])),
-            ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))])
+        if one_hot:
+            categorical_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value'])),
+                ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))])
+        else:
+            categorical_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value']))])
 
     if cat_features is None and num_features is not None:
         preprocessor = ColumnTransformer(
             transformers=[
                 ('num', numeric_transformer, num_features)])
+                
     elif cat_features is not None and num_features is  None:
         preprocessor = ColumnTransformer(
             transformers=[
                 ('cat', categorical_transformer, cat_features)])
+                
     elif cat_features is not None and num_features is not None:
         preprocessor = ColumnTransformer(
             transformers=[
