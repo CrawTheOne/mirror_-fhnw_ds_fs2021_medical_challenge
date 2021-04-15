@@ -367,7 +367,7 @@ def preprocessing_neg_col_to_cat(df, columns, verbose=False):
     for col in columns:
         if col == 'anti-ccp_ab':
             df = num_to_binary(df, 'anti-ccp_ab', 20)
-            df[col] = df[col].astype('bool')
+            # df[col] = df[col].astype('bool')
             if verbose:
                 print(df[col].value_counts(dropna=False))
         elif col == 'rheumatoid_factor':
@@ -375,7 +375,7 @@ def preprocessing_neg_col_to_cat(df, columns, verbose=False):
         else:
             df[col].replace(r'(see)', np.nan)
             df[col] = np.where(df[col].isna(), np.nan, np.where(df[col] =='NEG', 0, 1))
-            df[col] = df[col].astype('str').astype('bool')
+            # df[col] = df[col].astype('str').astype('bool')
             if verbose:
                 print(df[col].value_counts(dropna=False))
 
@@ -491,8 +491,7 @@ def preprocessing_numeric(df, num_to_cat = False, verbose=False):
     
         for _, i in enumerate(list_cols):
             if 'uom' in df.iloc[:, df.columns.get_indexer([i])+1].columns[0] \
-            and 'range' in df.iloc[:, df.columns.get_indexer([i])+2].columns[0] \
-            and 'range' in df.iloc[:, df.columns.get_indexer([i])-1].columns[0]:
+            and 'range' in df.iloc[:, df.columns.get_indexer([i])+2].columns[0]: # and 'range' in df.iloc[:, df.columns.get_indexer([i])-1].columns[0]:
                 ranges_list.append(i)
             if _ >= len(list_cols)-2:
                 break
@@ -569,7 +568,7 @@ def preprocessing_hepatitis(df, col=['hbc__ab', 'hbs__ag', 'hcv__ab'], verbose=F
         df.loc[df[c] == 'repeat reactive', c] = 1
         df.loc[df[c] == 'invalid result', c] = np.nan
         df.loc[df[c] == 'note:', c] = np.nan
-        df[c] = df[c].astype('bool')
+        # df[c] = df[c].astype('bool')
         if verbose:
             print(df[c].value_counts())
     return df
