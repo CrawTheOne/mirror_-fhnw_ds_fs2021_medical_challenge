@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
+from sklearn.impute import KNNImputer
 
 def read_data(rel_path, verbose=False, **kwargs):
     """
@@ -73,7 +74,7 @@ def rename(df, path):
     return df
 
 
-def impute_and_encode(cat_features, num_features, imputer, one_hot=True):
+def impute_and_encode(cat_features, num_features, imputer, one_hot=True, knn_impute=False, knn_neighbors=3):
     '''
     Creates preprocesser object that scales numeric features and onehotencodes categorical features
     
@@ -83,24 +84,31 @@ def impute_and_encode(cat_features, num_features, imputer, one_hot=True):
     num_features: list, list of numerical features
     imputer: dict, defines imputation method of SimpleImputer in Form {'categorical':{'strategy':'METHOD', 'fill_value'='METHOD'}, 'numerical':{'strategy':'METHOD'}}
     one_hot: bool, default True, if false prohibits one_hot_encoding
+    knn_impute: bool, default False, if true, uses KNN to impute missing values 
+    knn_neighbors: int, number of neighbors to consider for knn imputation
     
     Returns
     -------
     preprocessor: returns preprocesser object
     '''
+    if knn_impute:
+        impute_strat = KNNImputer(n_neighbors=knn_neighbors)
+    else:
+        impute_strat = SimpleImputer(strategy=imputer['numerical']['strategy'], fill_value=imputer['numerical']['fill_value'])
+    
     if num_features is not None:
         numeric_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy=imputer['numerical']['strategy'], fill_value=imputer['numerical']['fill_value'])),
+            ('imputer', impute_strat),
             ('scaler', StandardScaler())])
 
     if cat_features is not None:
         if one_hot:
             categorical_transformer = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value'])),
+                ('imputer', impute_strat),
                 ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))])
         else:
             categorical_transformer = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy=imputer['categorical']['strategy'], fill_value=imputer['categorical']['fill_value']))])
+                ('imputer', impute_strat)])
 
     if cat_features is None and num_features is not None:
         preprocessor = ColumnTransformer(
