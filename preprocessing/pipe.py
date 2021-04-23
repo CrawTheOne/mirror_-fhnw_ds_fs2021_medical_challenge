@@ -607,7 +607,14 @@ def define_uveitis(x):
         return False
     else:
         return True
-    
+
+def hot_encode_categorical(df):
+    for column in df:
+        #print(df[column].dtypes)
+        if df[column].dtypes == 'int8':
+            df[column] = df[column].astype('category').cat.codes
+    return df
+
 def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx", 
                        rename_path="../data/col_names_and_data_type.xlsx",
                        num_to_cat = False, 
@@ -618,8 +625,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
                        loc_approach = 'multi', 
                        save_as_csv = False,
                        binary_cat = False,
-                       hotencode_gender = False,
-                       hotencode_race = False,
+                       hot_encode_cat = False,
                        neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor']):
     """
     Preprocessing_pipe combines the preprocessing functions of the pipe.py script. It returns a cleaned dataset (note that missing values can still exist)
@@ -669,17 +675,14 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
         .pipe(preprocessing_neg_col_to_cat, columns=neg_col_as_cat)        # transform columns into binary (negative, postive) features
         .pipe(preprocessing_numeric, num_to_cat=num_to_cat)                # clean up numeric and if num_to_cat true transform into categorical features
         .pipe(drop_uom_and_range, verbose=False)                           # drop 'uom' amd 'range' columns after use
-        ) 
+         )
     
     if binary_cat:
         df['uveitis'] = df['cat'].apply(define_uveitis)
         df['uveitis'] = df['uveitis'].astype('bool')
 
-    if hotencode_gender:
-        df['gender'] = df['gender'].cat.codes
-
-    if hotencode_race:
-        df['race'] = df['race'].cat.codes
+    if hot_encode_cat:
+        hot_encode_categorical(df)
 
     for i in drop_filter:
         df = drop_via_filter(df, filter_str=i, verbose=verbose)
