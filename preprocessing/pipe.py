@@ -285,6 +285,7 @@ def num_to_binary(df, column, cutoff = None, verbose=False):
             print(df[column].value_counts(dropna=False))
         
         return df
+    
     # extract numerical values (strings with no digits = np.nan)
     elif(df[column].dtype != np.float64 or df[column].dtype != np.int64):
         df = extract_num(df, column, errors='coerce', verbose=False)
@@ -374,7 +375,7 @@ def preprocessing_neg_col_to_cat(df, columns, verbose=False):
     """
     for col in columns:
         if col == 'anti-ccp_ab':
-            df = num_to_binary(df, 'anti-ccp_ab', 20)
+            df = num_to_binary(df, 'anti-ccp_ab', 20, verbose=verbose)
             # df[col] = df[col].astype('bool')
             if verbose:
                 print(df[col].value_counts(dropna=False))
@@ -499,10 +500,11 @@ def preprocessing_numeric(df, num_to_cat = False, verbose=False):
     
         for _, i in enumerate(list_cols):
             if 'uom' in df.iloc[:, df.columns.get_indexer([i])+1].columns[0] \
-            and 'range' in df.iloc[:, df.columns.get_indexer([i])+2].columns[0]: # and 'range' in df.iloc[:, df.columns.get_indexer([i])-1].columns[0]:
+            and 'range' in df.iloc[:, df.columns.get_indexer([i])+2].columns[0] and 'range' in df.iloc[:, df.columns.get_indexer([i])-1].columns[0]:
                 ranges_list.append(i)
             if _ >= len(list_cols)-2:
                 break
+        print(ranges_list)
         df = range_var_to_cat(df, ranges_list, verbose =verbose)
     
     return df
@@ -611,8 +613,11 @@ def define_uveitis(x):
 def hot_encode_categorical(df):
     for column in df:
         #print(df[column].dtypes)
-        if df[column].dtypes == 'int8':
-            df[column] = df[column].astype('category').cat.codes
+        if df.loc[:,column].dtypes == 'int8':
+            df.loc[:,column] = df.loc[:,column].astype('category').cat.codes
+    """cat_columns = df.select_dtypes(include=['category']).columns
+    for column in cat_columns:
+        df[column] = df[column].cat.codes"""
     return df
 
 def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx", 
