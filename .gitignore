@@ -6,3 +6,5 @@ preprocessing/.ipynb_checkpoints/pipe-checkpoint.py
 preprocessing/__pycache__/pipe.cpython-38.pyc
 venv/*
 *checkpoint.ipynb
+machine_learning/.ipynb_checkpoints/helpers-checkpoint.py
+machine_learning/__pycache__/helpers.cpython-38.pyc
