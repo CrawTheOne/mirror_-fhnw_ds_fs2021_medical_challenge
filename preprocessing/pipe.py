@@ -518,12 +518,12 @@ def preprocessing_cat(df):
     
     return df
 
-def preprocessing_specific(df):
+def preprocessing_specific(df, min_other=10):
     df.specific_diagnosis = df.specific_diagnosis.str.lower().astype('category')
     df.loc[df['specific_diagnosis'].str.contains('masquerade', case=False), 'specific_diagnosis'] = 'not_uveitis'
 
     count = df.specific_diagnosis.value_counts().reset_index().rename(columns={'index':'diagnosis','specific_diagnosis':'count'})
-    diag_less_10 = count[count['count'] <= 10].diagnosis.tolist()
+    diag_less_10 = count[count['count'] <= min_other].diagnosis.tolist()
     df.specific_diagnosis = df.specific_diagnosis.replace({x:'other' for x in diag_less_10})
     df.specific_diagnosis = df.specific_diagnosis.astype('category')
     return df
@@ -631,7 +631,8 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
                        save_as_csv = False,
                        binary_cat = False,
                        hot_encode_cat = False,
-                       neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor']):
+                       neg_col_as_cat = ['anti-ccp_ab','anti-ena_screen','antinuclear_antibody','dna_double-stranded_ab', 'rheumatoid_factor'],
+                       min_other = 10):
     """
     Preprocessing_pipe combines the preprocessing functions of the pipe.py script. It returns a cleaned dataset (note that missing values can still exist)
     that is ready to be piped into a ml-pipeline (see impute_and_encode-function in pipe.py)
@@ -652,6 +653,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
     :param neg_col_as_cat: list, a list of column names of features to transform into binary variables. 0 = 'Negative', 1 = 'Positive'
     :param save_as_csv:    bool, default True, if true saves the transformed dataframe named 'cleaned_uveitis_data' to data folder 
                                 (Attention! If true, it is possible that already existing files get overwritten)
+    :param min_other:      int, default 10, defines the minimum number of cases in specific diagnosis a category needs to have to not be collapsed into "other"
     
     Return
     ------
@@ -674,7 +676,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
         .pipe(preprocessing_race)                                          # collapse 'race' feature
         .pipe(preprocessing_loc, approach=loc_approach, verbose=verbose)   # use approach ='binary' for binary classification
         .pipe(preprocessing_cat)                                           # collapes 'cat' feature
-        .pipe(preprocessing_specific)                                      # collapse 'specific_diagnosis'
+        .pipe(preprocessing_specific, min_other=min_other)                 # collapse 'specific_diagnosis'
         .pipe(preprocessing_inflammation)                                  # transform columns that contain information about severeness of inlamation
         .pipe(preprocessing_hepatitis)                                     # clean and binarize hepatitis-columns
         .pipe(preprocessing_neg_col_to_cat, columns=neg_col_as_cat)        # transform columns into binary (negative, postive) features
