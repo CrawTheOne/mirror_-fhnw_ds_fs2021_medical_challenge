@@ -92,3 +92,16 @@ def get_feature_names(pipeline_object):
     num_feat = pipeline_object[0].transformers_[0][2]
     one_hot_feat = pipeline_object[0].transformers_[1][1]['onehot'].get_feature_names(categorical_features)
     return list(num_feat) + list(one_hot_feat)
+
+
+def plot_featureimportance(pipeline_object):
+    """
+    Plot feature importance in percent for pipeline_object
+    """
+    a = pd.DataFrame()
+    a['value'] = pipeline_object[1].feature_importances_
+    a['feature'] = get_feature_names(pipeline_object)
+    a = a.sort_values(by='value', ascending=False)
+    plt.figure(figsize=(10,7))
+    g = sns.barplot(y=a.feature, x=a.value*100, data= a, color = 'steelblue')
+    helpers.plot_wrapper(g, 'Feature Importances', None, 'Percentage', 'Feature Name')
