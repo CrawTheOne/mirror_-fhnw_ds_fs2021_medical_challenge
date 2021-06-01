@@ -82,3 +82,13 @@ def plot_validation_curve(estimator, train, test, param_name, param_range, scori
                      test_mean + test_std, color="gainsboro")
 
     return g
+
+def get_feature_names(pipeline_object):
+    """return feature names after transformation for feature name tracking after one_hot_encoding
+    
+    To be used with a pipeline object, utilizing a preprocessor (sklearn ColumnTransformer) as first step
+    Inspiration: https://stackoverflow.com/questions/57528350/can-you-consistently-keep-track-of-column-labels-using-sklearns-transformer-api/57534118#57534118
+    """
+    num_feat = pipeline_object[0].transformers_[0][2]
+    one_hot_feat = pipeline_object[0].transformers_[1][1]['onehot'].get_feature_names(categorical_features)
+    return list(num_feat) + list(one_hot_feat)
