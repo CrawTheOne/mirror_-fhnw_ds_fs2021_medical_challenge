@@ -581,6 +581,7 @@ def preprocessing_hepatitis(df, col=['hbc__ab', 'hbs__ag', 'hcv__ab'], verbose=F
         # df[c] = df[c].astype('bool')
         if verbose:
             print(df[c].value_counts())
+        df[c] = df[c].astype('category')
     return df
 
 def preprocessing_inflammation(df, col = ['ac_abn_od_cells', 'ac_abn_os_cells', 'vit_abn_od_cells',
