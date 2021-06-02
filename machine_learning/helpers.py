@@ -83,7 +83,7 @@ def plot_validation_curve(estimator, train, test, param_name, param_range, scori
 
     return g
 
-def get_feature_names(pipeline_object):
+def get_feature_names(pipeline_object, categorical_features):
     """return feature names after transformation for feature name tracking after one_hot_encoding
     
     To be used with a pipeline object, utilizing a preprocessor (sklearn ColumnTransformer) as first step
@@ -94,14 +94,14 @@ def get_feature_names(pipeline_object):
     return list(num_feat) + list(one_hot_feat)
 
 
-def plot_featureimportance(pipeline_object):
+def plot_featureimportance(pipeline_object, categorical_features):
     """
     Plot feature importance in percent for pipeline_object
     """
     a = pd.DataFrame()
     a['value'] = pipeline_object[1].feature_importances_
-    a['feature'] = get_feature_names(pipeline_object)
+    a['feature'] = get_feature_names(pipeline_object, categorical_features)
     a = a.sort_values(by='value', ascending=False)
     plt.figure(figsize=(10,7))
     g = sns.barplot(y=a.feature, x=a.value*100, data= a, color = 'steelblue')
-    helpers.plot_wrapper(g, 'Feature Importances', None, 'Percentage', 'Feature Name')
+    plot_wrapper(g, 'Feature Importances', None, 'Percentage', 'Feature Name')
