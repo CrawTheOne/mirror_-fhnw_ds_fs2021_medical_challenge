@@ -10,3 +10,5 @@ venv/*
 *checkpoint.ipynb
 machine_learning/.ipynb_checkpoints/helpers-checkpoint.py
 machine_learning/__pycache__/helpers.cpython-38.pyc
+data/cleaned_uveitis_data.csv
+data/uveitis_data.xlsx
