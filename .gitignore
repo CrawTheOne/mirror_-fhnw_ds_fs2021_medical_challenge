@@ -1,6 +1,8 @@
 .idea/*
 preprocessing/.ipynb_checkpoints/preprocessing_Roman-checkpoint.ipynb
 data/~$uveitis_data.xlsx
+data/uveitis_explanans.xlsx
+data/cleaned_uveitis_data
 preprocessing/.ipynb_checkpoints/__init__-checkpoint.py
 preprocessing/.ipynb_checkpoints/pipe-checkpoint.py
 preprocessing/__pycache__/pipe.cpython-38.pyc
