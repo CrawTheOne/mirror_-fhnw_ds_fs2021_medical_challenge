@@ -645,7 +645,7 @@ def preprocessing_pipe(rel_path="../data/uveitis_data.xlsx",
     :param num_to_cat:     bool, default False, if True numeric features (with uoms and ranges) get encoded into a categorical feature 
                                with categories 0 = 'below range', 1 = 'in range', 2 = 'above range'. 
                                If false, numeric features will only get cleaned up (brought into uniform data type) 
-    :param nan_percentage: float, in range 0 to 1, default 0.5 (aka 50%). Features with more than nan_percentage missing values will get droppep
+    :param nan_percentage: float, in range 0 to 1, default 0.5 (aka 50%). Features with more than nan_percentage missing values will get dropped
     :param drop_columns:   list, a list containing column names to be dropped.
     :param drop_filter:    list, a list containing strings. If the name of a feature contains one of the strings it will be dropped.
     :param loc_approach:   if 'multi' (default): consolidates location feature into multiple locations ('anterior','posterior','pan...',etc.) 
